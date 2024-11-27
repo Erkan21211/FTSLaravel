@@ -30,15 +30,20 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the request
-        $validated = $request->validate([
-            'title' => 'required|max:255',
-            'content' => 'required',
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
         ]);
-        // Create a new post
-        Post::create($validated);
-        // Redirect to the index page
-        return redirect()->route('posts.index')->with('success', 'Post created successfully');
+
+        // Save the post with the authenticated user's ID
+        Post::create([
+            'user_id' => auth()->id(), // Use the currently authenticated user's ID
+            'title' => $validatedData['title'],
+            'content' => $validatedData['content'],
+        ]);
+
+        return redirect()->route('posts.index')->with('success', 'Post created successfully!');
+
     }
 
     /**
@@ -55,6 +60,11 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        // Check if the authenticated user owns the post
+        if ($post->user_id !== auth()->id()) {
+            abort(403); // Return 403 Forbidden if not authorized
+        }
+
         // Return the view with the post
         return view('posts.edit', compact('post'));
     }
@@ -69,6 +79,12 @@ class PostController extends Controller
             'title' => 'required|max:255',
             'content' => 'required',
         ]);
+
+        // Update the post
+        $post->update(['user_id' => auth()->id(), 'title' => $validated['title'], 'content' => $validated['content']]);
+
+        // Redirect to the index page
+        return redirect()->route('posts.index')->with('success', 'Post updated successfully');
     }
 
     /**

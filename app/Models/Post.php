@@ -13,7 +13,8 @@ class Post extends Model
     protected $table = 'posts';
 
     // Define the fillable properties
-    protected $fillable = ['title', 'content'];
+    protected $fillable = ['user_id', 'title', 'content'];
+
 
     // Define the relationship with the User model
     public function user()

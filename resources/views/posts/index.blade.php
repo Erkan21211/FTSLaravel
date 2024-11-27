@@ -27,7 +27,7 @@
         @foreach($posts as $post) <!-- Iterate through each post -->
         <tr>
             <td>{{ $post->title }}</td>
-            <td>{{ $post->description ?? 'No description available' }}</td>
+            <td>{{ $post->content ?? 'No description available' }}</td>
             <td>{{ $post->user ? $post->user->name : 'No user found' }}</td>
             <td>
                 <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning btn-sm">Update</a>
