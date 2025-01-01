@@ -23,9 +23,14 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+
+
+        $customer = Auth::user(); // Haal de ingelogde gebruiker op
+        return view('profile.edit', compact('customer'));
+
+//        return view('profile.edit', [
+//            'user' => $request->user(),
+//        ]);
     }
 
     /**
@@ -33,15 +38,21 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
+        $customer = Auth::user();
 
-        $request->user()->save();
+        $validated = Validator::make($request->all(), [
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:customers,email,' . $customer->id],
+            'phone_number' => ['nullable', 'string', 'max:20'],
+        ])->validate();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        dd($validated); // Controleer de gevalideerde gegevens
+
+        $customer->update($validated);
+
+        return redirect()->route('profile.edit')->with('success', 'Profiel succesvol bijgewerkt!');
     }
 
     /**
