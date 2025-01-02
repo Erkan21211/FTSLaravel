@@ -36,19 +36,16 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(Request $request)
     {
-
         $customer = Auth::user();
 
-        $validated = Validator::make($request->all(), [
+        $validated = $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:customers,email,' . $customer->id],
             'phone_number' => ['nullable', 'string', 'max:20'],
-        ])->validate();
-
-        dd($validated); // Controleer de gevalideerde gegevens
+        ]);
 
         $customer->update($validated);
 
