@@ -9,16 +9,14 @@ return new class extends Migration {
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('customer_id');
-            $table->unsignedBigInteger('festival_id');
-            $table->timestamp('booking_date');
+            $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
+            $table->foreignId('festival_id')->constrained('festivals')->onDelete('cascade');
+            $table->foreignId('bus_planning_id')->nullable()->constrained('bus_planning')->onDelete('cascade');
+            $table->dateTime('booking_date');
             $table->decimal('cost', 8, 2);
-            $table->enum('status', ['afgerond', 'geannuleerd', 'actief'])->default('actief');
+            $table->string('status')->default('actief');
             $table->integer('points_earned')->default(0);
             $table->timestamps();
-
-            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
-            $table->foreign('festival_id')->references('id')->on('festivals')->onDelete('cascade');
         });
     }
 

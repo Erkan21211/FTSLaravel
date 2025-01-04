@@ -15,9 +15,14 @@ return new class extends Migration
             $table->id();
             $table->foreignId('festival_id')->constrained('festivals')->onDelete('cascade');
             $table->foreignId('bus_id')->constrained('buses')->onDelete('cascade');
+            $table->dateTime('departure_time')->nullable();;
+            $table->string('departure_location');
+            $table->integer('available_seats');
+            $table->decimal('cost_per_seat', 8, 2);
             $table->integer('seats_filled')->default(0);
             $table->timestamps();
         });
+
     }
 
     /**

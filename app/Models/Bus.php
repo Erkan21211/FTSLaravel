@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Festival extends Model
+class Bus extends Model
 {
+    /** @use HasFactory<\Database\Factories\BusFactory> */
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'location',
-        'start_date',
-        'end_date',
+        'name', // Naam of identificatie van de bus
+        'capacity', // Totale capaciteit van de bus
     ];
 
     public function busPlannings()

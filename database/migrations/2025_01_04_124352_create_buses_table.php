@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('buses', function (Blueprint $table) {
             $table->id();
-            $table->string('bus_number', 50);
-            $table->integer('capacity');
-            $table->enum('status', ['available', 'full', 'inactive'])->default('available');
+            $table->string('name'); // Naam of herkenning van de bus
+            $table->integer('capacity'); // Totale capaciteit van de bus
             $table->timestamps();
         });
     }

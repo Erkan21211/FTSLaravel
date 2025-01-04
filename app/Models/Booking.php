@@ -12,6 +12,7 @@ class Booking extends Model
     protected $fillable = [
         'customer_id',
         'festival_id',
+        'bus_planning_id',
         'booking_date',
         'cost',
         'status',
@@ -26,6 +27,11 @@ class Booking extends Model
     public function festival()
     {
         return $this->belongsTo(Festival::class);
+    }
+
+    public function busPlanning()
+    {
+        return $this->belongsTo(BusPlanning::class);
     }
 
     protected $casts = [

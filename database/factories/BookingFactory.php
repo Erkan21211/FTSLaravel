@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Booking;
+use App\Models\BusPlanning;
 use App\Models\Customer;
 use App\Models\Festival;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -19,10 +20,11 @@ class BookingFactory extends Factory
         return [
             'customer_id' => Customer::factory(),
             'festival_id' => Festival::factory(),
-            'booking_date' => $this->faker->dateTimeBetween('-1 month', '+1 month'),
-            'cost' => $this->faker->randomFloat(2, 50, 500),
-            'status' => $this->faker->randomElement(['afgerond', 'geannuleerd', 'actief']),
-            'points_earned' => $this->faker->numberBetween(10, 100), // Voeg punten toe
+            'bus_planning_id' => BusPlanning::factory(),
+            'booking_date' => $this->faker->dateTimeBetween('+1 week', '+1 month'),
+            'cost' => $this->faker->randomFloat(2, 20, 100),
+            'status' => 'actief',
+            'points_earned' => 0,
         ];
     }
 }
