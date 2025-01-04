@@ -15,4 +15,9 @@ class Festival extends Model
         'start_date',
         'end_date',
     ];
+
+    public function busPlanning()
+    {
+        return $this->hasMany(BusPlanning::class);
+    }
 }
