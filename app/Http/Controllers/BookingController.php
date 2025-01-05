@@ -21,6 +21,19 @@ class BookingController extends Controller
         return view('bookings.index', compact('bookings'));
     }
 
+    /**
+     * Toon de details van een boeking.
+     */
+
+    public function show(Booking $booking) {
+
+        if ($booking->customer_id !== auth()->id()) {
+            abort(403, 'Je hebt geen toegang tot deze boeking.');
+        }
+
+        return view('bookings.show', compact('booking'));
+    }
+
     public function store(Request $request, BusPlanning $busPlanning)
     {
         // gebruiker al een actieve boeking heeft voor dezelfde busrit

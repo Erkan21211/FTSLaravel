@@ -50,7 +50,7 @@
                                         <form method="POST" action="{{ route('bookings.cancel', $booking->id) }}">
                                             @csrf
                                             @method('PATCH')
-                                            <button type="submit" class="bg-red-500 text-white py-1 px-3 rounded text-xs font-medium hover:bg-red-600">
+                                            <button type="submit" class="bg-red-500 text-black py-1 px-3 rounded text-xs font-medium hover:bg-red-600">
                                                 Annuleren
                                             </button>
                                         </form>

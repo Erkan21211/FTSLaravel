@@ -27,17 +27,8 @@
                         <td class="p-4">€{{ number_format($busPlanning->cost_per_seat, 2) }}</td>
                         <td class="p-4">{{ $busPlanning->available_seats - $busPlanning->seats_filled }}</td>
                         <td class="p-4">
-                            @if (($busPlanning->available_seats - $busPlanning->seats_filled) > 0)
-                                <form method="POST" action="{{ route('reizen.book', $busPlanning->id) }}">
-                                    @csrf
-                                    <button type="submit"
-                                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-md transition">
-                                        Boek Nu
-                                    </button>
-                                </form>
-                            @else
-                                <span class="text-red-500 font-semibold">Volgeboekt</span>
-                            @endif
+                            <a href="{{ route('reizen.show', $busPlanning) }}" class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded shadow-md transition">
+                                bekijken
                         </td>
                     </tr>
                 @endforeach

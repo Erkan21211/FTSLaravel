@@ -29,6 +29,11 @@ class Booking extends Model
         return $this->belongsTo(Festival::class);
     }
 
+    public function bus()
+    {
+        return $this->busPlanning->belongsTo(Bus::class);
+    }
+
     public function busPlanning()
     {
         return $this->belongsTo(BusPlanning::class);

@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     // Booking management
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index'); // Geschiedenis
     Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store'); // Boeking opslaan
+    Route::get('/bookings/{booking}', [BookingController::class, 'show'])->name('bookings.show'); // Details busrit pagina
     Route::patch('/bookings/{booking}/cancel', [BookingController::class, 'cancel'])->name('bookings.cancel'); // Annuleren
 });
 

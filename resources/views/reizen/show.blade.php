@@ -1,72 +1,37 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-white leading-tight">
-            {{ $festival->name }}
+        <h2 class="font-semibold text-xl text-white leading-tight text-center">
+            Reis naar {{ $festival->name }}
         </h2>
     </x-slot>
 
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
-        <div class="bg-gray-800 shadow-md rounded-lg p-6">
-            <!-- Festival Details -->
-            <h3 class="text-lg text-white font-bold mb-4">Festivaldetails</h3>
-            <p class="text-white"><strong>Locatie:</strong> {{ $festival->location }}</p>
-            <p class="text-white"><strong>Startdatum:</strong> {{ $festival->start_date }}</p>
-            <p class="text-white"><strong>Einddatum:</strong> {{ $festival->end_date }}</p>
+    <div class="flex justify-center items-center min-h-screen">
+        @foreach ($busPlannings as $busPlanning)
+            <div class="bg-white rounded-lg shadow-md p-8 w-96 text-center mb-6">
+                <!-- Reisdetails -->
+                <h3 class="text-gray-800 font-bold text-lg mb-4">Reisdetails</h3>
+                <p class="text-gray-600"><strong>Vertrektijd:</strong> {{ $busPlanning->departure_time }}</p>
+                <p class="text-gray-600"><strong>Locatie:</strong> {{ $busPlanning->departure_location }}</p>
+                <p class="text-gray-600"><strong>Beschikbare Stoelen:</strong> {{ $busPlanning->available_seats - $busPlanning->seats_filled }}</p>
+                <p class="text-gray-600"><strong>Kosten:</strong> €{{ number_format($busPlanning->cost_per_seat, 2) }}</p>
 
-            <!-- Beschikbare Bussen -->
-            <h4 class="text-lg text-white font-bold mt-6">Beschikbare Bussen</h4>
+                <!-- Beschrijving -->
+                <p class="text-gray-500 mt-4">
+                    {{ $festival->description ?? 'Beschrijving van de reis is momenteel niet beschikbaar.' }}
+                </p>
 
-            @if ($busPlanning->isEmpty())
-                <p class="text-gray-400 mt-4">Er zijn momenteel geen busritten beschikbaar voor dit festival.</p>
-            @else
-                <table class="w-full text-white mt-4 border-collapse">
-                    <thead>
-                    <tr>
-                        <th class="border-b border-gray-600 p-2 text-left">Busnummer</th>
-                        <th class="border-b border-gray-600 p-2 text-left">Capaciteit</th>
-                        <th class="border-b border-gray-600 p-2 text-left">Beschikbare Stoelen</th>
-                        <th class="border-b border-gray-600 p-2 text-left">Kosten per Stoel</th>
-                        <th class="border-b border-gray-600 p-2 text-left">Actie</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach ($busPlanning as $planning)
-                        <tr>
-                            <td class="p-2">{{ $planning->bus->id }}</td> <!-- Busnummer -->
-                            <td class="p-2">{{ $planning->bus->capacity }}</td>
-                            <td class="p-2">{{ $planning->available_seats - $planning->seats_filled }}</td>
-                            <td class="p-2">€{{ number_format($planning->cost_per_seat, 2) }}</td>
-                            <td class="p-2">
-                                @if ($planning->available_seats > $planning->seats_filled)
-                                    <form method="POST" action="{{ route('reizen.book', $planning->id) }}">
-                                        @csrf
-                                        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-md transition">
-                                            Boek deze reis
-                                        </button>
-                                    </form>
-                                @else
-                                    <span class="text-red-500">Volgeboekt</span>
-                                @endif
-                            </td>
-                        </tr>
-                    @endforeach
-                    @if ($busPlanning->isEmpty())
-                        <p class="text-white">Er zijn geen busritten beschikbaar voor dit festival.</p>
-                    @else
-                        <table class="w-full text-white mt-4">
-                            <!-- Busritten tabel -->
-                        </table>
-                    @endif
-                    </tbody>
-                </table>
-            @endif
-
-            <!-- Terugknop -->
-            <div class="mt-6">
-                <a href="{{ route('reizen.index') }}" class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded shadow-md transition">
-                    Terug naar Overzicht
-                </a>
+                <!-- Knop om te boeken -->
+                @if (($busPlanning->available_seats - $busPlanning->seats_filled) > 0)
+                    <form method="POST" action="{{ route('reizen.book', $busPlanning->id) }}" class="mt-6">
+                        @csrf
+                        <button type="submit" class="bg-blue-500 hover:bg-black-200 text-black font-bold py-2 px-4 rounded w-full">
+                            Nu Boeken
+                        </button>
+                    </form>
+                @else
+                    <p class="text-red-500 mt-6">Deze reis is volgeboekt.</p>
+                @endif
             </div>
-        </div>
+        @endforeach
     </div>
 </x-app-layout>

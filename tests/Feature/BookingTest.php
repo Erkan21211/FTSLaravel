@@ -77,4 +77,19 @@ class BookingTest extends TestCase
         // Controleer dat seats_filled niet is gewijzigd
         $this->assertEquals(10, $busPlanning->fresh()->seats_filled);
     }
+
+    public function test_user_can_view_booking_details()
+    {
+        $user = Customer::factory()->create();
+        $this->actingAs($user);
+
+        $booking = Booking::factory()->create([
+            'customer_id' => $user->id,
+        ]);
+
+        $response = $this->get(route('bookings.show', $booking->id));
+
+        $response->assertStatus(200);
+        $response->assertSee($booking->id);
+    }
 }
