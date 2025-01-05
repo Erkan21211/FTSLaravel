@@ -24,8 +24,16 @@
                 <a href="#" class="text-gray-600 hover:text-gray-800">Home</a>
                 <a href="#" class="text-gray-600 hover:text-gray-800">Reizen</a>
                 <a href="#" class="text-gray-600 hover:text-gray-800">Contact</a>
-                <a href="#" class="text-gray-600 hover:text-gray-800">Profiel</a>
-                <a href="#" class="text-gray-600 hover:text-gray-800">Login/Logout</a>
+                @if (Auth::check())
+                    <a href="{{ route('profile') }}" class="text-gray-600 hover:text-gray-800">Profiel</a>
+                    <a href="{{ route('logout') }}" class="text-gray-600 hover:text-gray-800"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                @else
+                    <a href="{{ route('register') }}" class="text-gray-600 hover:text-gray-800">Register</a>
+                @endif
             </nav>
         </div>
     </div>
