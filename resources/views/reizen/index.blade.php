@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
-            {{ __('Beschikbare Busritten') }}
+            {{ __('Beschikbare Busritten naar festivals') }}
         </h2>
     </x-slot>
 
@@ -19,19 +19,25 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($busPlannings as $busPlanning)
-                    <tr class="hover:bg-gray-700 transition">
-                        <td class="p-4">{{ $busPlanning->festival->name }}</td>
-                        <td class="p-4">{{ $busPlanning->bus->name }}</td>
-                        <td class="p-4">{{ $busPlanning->departure_time }}</td>
-                        <td class="p-4">€{{ number_format($busPlanning->cost_per_seat, 2) }}</td>
-                        <td class="p-4">{{ $busPlanning->available_seats - $busPlanning->seats_filled }}</td>
-                        <td class="p-4">
-                            <a href="{{ route('reizen.show', $busPlanning) }}" class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded shadow-md transition">
-                                bekijken
-                        </td>
-                    </tr>
-                @endforeach
+                    @foreach ($busPlannings as $busPlanning)
+                        <tr class="hover:bg-gray-700 transition">
+                            <td class="p-4">{{ $busPlanning->festival->name ?? 'Festival onbekend' }}</td>
+                            <td class="p-4">{{ $busPlanning->bus->name ?? 'Bus onbekend' }}</td>
+                            <td class="p-4">{{ $busPlanning->departure_time }}</td>
+                            <td class="p-4">€{{ number_format($busPlanning->cost_per_seat, 2) }}</td>
+                            <td class="p-4">{{ $busPlanning->available_seats - $busPlanning->seats_filled }}</td>
+                            <td class="p-4">
+                                @if ($busPlanning->festival)
+                                    <a href="{{ route('reizen.show', $busPlanning->festival->id) }}"
+                                       class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded shadow-md transition">
+                                        bekijken
+                                    </a>
+                                @else
+                                    <span class="text-gray-500">Niet beschikbaar</span>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

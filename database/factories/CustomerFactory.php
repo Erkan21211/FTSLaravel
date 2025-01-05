@@ -24,7 +24,7 @@ class CustomerFactory extends Factory
             'email' => $this->faker->unique()->safeEmail,
             'phone_number' => $this->faker->numerify('06########'),
             'password' => bcrypt('password'), // Standaard wachtwoord
-            'points' => $this->faker->numberBetween(0, 100),
+            'points' => 0, // standaard waarde
         ];
     }
 }

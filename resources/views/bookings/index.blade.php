@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-white text-xl leading-tight">
             {{ __('Mijn Boekingen') }}
         </h2>
     </x-slot>
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
         @if (session('success'))
-            <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg">
+            <div class="p-4 mb-4 text-green-600 bg-green-100 rounded-lg">
                 {{ session('success') }}
             </div>
         @endif
@@ -50,7 +50,8 @@
                                         <form method="POST" action="{{ route('bookings.cancel', $booking->id) }}">
                                             @csrf
                                             @method('PATCH')
-                                            <button type="submit" class="bg-red-500 text-black py-1 px-3 rounded text-xs font-medium hover:bg-red-600">
+                                            <button type="submit"
+                                                    class="bg-red-500 text-black py-1 px-3 rounded text-xs font-medium hover:bg-red-600">
                                                 Annuleren
                                             </button>
                                         </form>

@@ -17,11 +17,9 @@
                 <!-- Points Display -->
                 <div class="mb-4">
                     <h3 class="text-lg font-semibold text-gray-800">
-                        {{ __('Je punten') }}
+                        {{ __('Punten saldo') }}
                     </h3>
-                    <p class="text-gray-600">
-                        {{ __('Huidig punten saldo:') }} <strong>{{ $customer->points }}</strong>
-                    </p>
+                    <p class="text-white">Je hebt <strong>{{ auth()->user()->points }}</strong> punten.</p>
                 </div>
 
                 <!-- Profile Update Form -->
@@ -31,30 +29,34 @@
 
                     <!-- First Name -->
                     <div>
-                        <x-input-label for="first_name" :value="__('Voornaam')" />
-                        <x-text-input id="first_name" type="text" name="first_name" value="{{ old('first_name', $customer->first_name) }}" required autofocus />
-                        <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
+                        <x-input-label for="first_name" :value="__('Voornaam')"/>
+                        <x-text-input id="first_name" type="text" name="first_name"
+                                      value="{{ old('first_name', $customer->first_name) }}" required autofocus/>
+                        <x-input-error :messages="$errors->get('first_name')" class="mt-2"/>
                     </div>
 
                     <!-- Last Name -->
                     <div class="mt-4">
-                        <x-input-label for="last_name" :value="__('Achternaam')" />
-                        <x-text-input id="last_name" type="text" name="last_name" value="{{ old('last_name', $customer->last_name) }}" required />
-                        <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
+                        <x-input-label for="last_name" :value="__('Achternaam')"/>
+                        <x-text-input id="last_name" type="text" name="last_name"
+                                      value="{{ old('last_name', $customer->last_name) }}" required/>
+                        <x-input-error :messages="$errors->get('last_name')" class="mt-2"/>
                     </div>
 
                     <!-- Email -->
                     <div class="mt-4">
-                        <x-input-label for="email" :value="__('E-mailadres')" />
-                        <x-text-input id="email" type="email" name="email" value="{{ old('email', $customer->email) }}" required />
-                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                        <x-input-label for="email" :value="__('E-mailadres')"/>
+                        <x-text-input id="email" type="email" name="email" value="{{ old('email', $customer->email) }}"
+                                      required/>
+                        <x-input-error :messages="$errors->get('email')" class="mt-2"/>
                     </div>
 
                     <!-- Phone Number -->
                     <div class="mt-4">
-                        <x-input-label for="phone_number" :value="__('Telefoonnummer')" />
-                        <x-text-input id="phone_number" type="text" name="phone_number" value="{{ old('phone_number', $customer->phone_number) }}" />
-                        <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
+                        <x-input-label for="phone_number" :value="__('Telefoonnummer')"/>
+                        <x-text-input id="phone_number" type="text" name="phone_number"
+                                      value="{{ old('phone_number', $customer->phone_number) }}"/>
+                        <x-input-error :messages="$errors->get('phone_number')" class="mt-2"/>
                     </div>
 
                     <div class="flex items-center justify-end mt-4">

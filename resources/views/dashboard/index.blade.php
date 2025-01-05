@@ -17,6 +17,10 @@
                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded shadow-md transition">
                     Nu boeken
                 </a>
+                <div class="bg-gray-800 text-white rounded-lg p-6 shadow-md">
+                    <h3 class="text-lg font-bold">Puntensaldo</h3>
+                    <p>Je hebt <strong>{{ auth()->user()->points }}</strong> punten.</p>
+                </div>
             </div>
 
             <!-- Zoekfunctie -->

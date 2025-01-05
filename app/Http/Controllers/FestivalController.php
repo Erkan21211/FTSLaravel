@@ -25,8 +25,9 @@ class FestivalController extends Controller
     public function show(Festival $festival)
     {
         $busPlannings = BusPlanning::where('festival_id', $festival->id)->get();
+        $user = auth()->user();
 
-        return view('reizen.show', compact('festival', 'busPlannings'));
+        return view('reizen.show', compact('festival', 'busPlannings', 'user'));
     }
 
     public function store(Request $request)

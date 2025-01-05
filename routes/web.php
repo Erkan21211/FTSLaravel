@@ -28,7 +28,10 @@ Route::middleware('auth')->group(function () {
 
 
     // Bookings for bus planning
-    Route::post('/reizen/{busPlanning}/book', [BookingController::class, 'store'])->name('reizen.book'); // Correcte route
+    Route::post('/reizen/{busPlanning}/book', [BookingController::class, 'store'])->name('reizen.book'); // Boeking opslaan
+    Route::post('/reizen/{busPlanning}/redeem', [BookingController::class, 'redeemPoints'])->name('reizen.redeem');
+
+
 
     // Booking management
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index'); // Geschiedenis
