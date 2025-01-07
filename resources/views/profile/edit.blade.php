@@ -6,8 +6,8 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
-        <div class="bg-white shadow-sm sm:rounded-lg">
-            <div class="p-6 bg-white border-b border-gray-200">
+        <div class="bg-gray-800 shadow-sm sm:rounded-lg">
+            <div class="p-6 bg-gray-800 border-b border-gray-200">
                 @if (session('success'))
                     <div class="mb-4 font-medium text-sm text-green-600">
                         {{ session('success') }}
@@ -16,7 +16,7 @@
 
                 <!-- Points Display -->
                 <div class="mb-4">
-                    <h3 class="text-lg font-semibold text-gray-800">
+                    <h3 class="text-lg font-semibold text-white">
                         {{ __('Punten saldo') }}
                     </h3>
                     <p class="text-white">Je hebt <strong>{{ auth()->user()->points }}</strong> punten.</p>

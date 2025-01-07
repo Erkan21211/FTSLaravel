@@ -1,16 +1,27 @@
 <?php
 
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FestivalController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicReizenController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
 // Welcome Page
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
+Route::post('/contact/submit', [ContactController::class, 'submit'])->name('contact.submit');
+
+
+Route::get('/reizen/guest', [PublicReizenController::class, 'index'])->name('reizen.guest');
 
 // Profile Routes for authenticated users
 Route::middleware('auth')->group(function () {
@@ -32,13 +43,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/reizen/{busPlanning}/redeem', [BookingController::class, 'redeemPoints'])->name('reizen.redeem');
 
 
-
     // Booking management
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index'); // Geschiedenis
     Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store'); // Boeking opslaan
     Route::get('/bookings/{booking}', [BookingController::class, 'show'])->name('bookings.show'); // Details busrit pagina
     Route::patch('/bookings/{booking}/cancel', [BookingController::class, 'cancel'])->name('bookings.cancel'); // Annuleren
 });
+
 
 // Registration routes
 Route::get('/register', [RegistrationController::class, 'showRegistrationForm'])->name('register');
