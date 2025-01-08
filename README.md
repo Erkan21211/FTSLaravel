@@ -25,11 +25,8 @@ cd <repository-folder>
     CMD: composer install
     CMD: npm install
 
-### 3. opzet van de database
-
-### Maak een database aan met de naam `festival_travel_system`.
-``.env.example -> .env
-CMD
+### 3. opzet van de database ~ Maak een database aan met de naam `festival_travel_system`.
+``CMD: .env.example -> .env
 DB_CONNECTION=mysql
 <br>
 DB_HOST=127.0.0.1
@@ -42,34 +39,31 @@ DB_USERNAME=root
 <br>
 DB_PASSWORD= // of wat je wachtwoord ook is
 <br>
-```
+``
 
 
 ### 4. Genereer een applicatie sleutel
-zet de applicatie sleutel in de .env file
-```CMD
+## zet de applicatie sleutel in de .env file
+    CMD: php artisan key:generate
 
-5. Voer de migraties en seeders uit
-```CMD 
-php artisan migrate --seed
-
+### 5. Voer de migraties en seeders uit
+    CMD: php artisan migrate --seed
 
 
-6. Build Frontend Assets
-For development:
-npm run dev
-For production:
-npm run build
+
+### 6. Build de Frontend
+    CMD: npm run dev
+### or production:
+    CMD: npm run build
 
 
-7. Start de Development Server
-```CMD
-php artisan serve
+### 7. Start de Development Server
+    CMD php artisan serve
 
 
-8. Access the Application
-Open your browser and go to:
-http://localhost:8000
+### 8. Toegang tot de applicatie
+## open je browser en ga naar:
+    cmd: http://localhost:8000
 
 
 
