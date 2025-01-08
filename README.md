@@ -41,7 +41,8 @@ DB_DATABASE=festival_travel_system
 DB_USERNAME=root
 <br>
 DB_PASSWORD= // of wat je wachtwoord ook is
-``
+<br>
+```
 
 
 ### 4. Genereer een applicatie sleutel
