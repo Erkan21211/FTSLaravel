@@ -14,54 +14,60 @@ A Laravel-based system for managing festival travel bookings.
 
 ## Quick Start Guide
 
-### 1. Clone the Repository
+### 1. Clone de repository
 
-```bash
+    ```CMD
 git clone <repository-url>
 cd <repository-folder>
-2. Install Dependencies
-bash
-Code kopiëren
+
+
+### 2. Install Dependencies
+    
+    ```CMD
 composer install
 npm install
 
-3. Set Up Environment Variables
-Copy the example .env file and configure your environment:
+3. opzet van de database
+    ```CMD
 
-bash
-Code kopiëren
-cp .env.example .env
-Update .env with your database credentials and other app-specific details.
-4. Generate App Key
-bash
-Code kopiëren
+Maak een database aan met de naam `festival_travel_system`.
+.env.example -> .env
+    ```CMD
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=festival_travel_system
+DB_USERNAME=root
+DB_PASSWORD= // of wat je wachtwoord ook is
+
+    ```CMD
+
+
+4. Genereer een applicatie sleutel
+zet de applicatie sleutel in de .env file
+```CMD 
 php artisan key:generate
-5. Set Up Database
-Create a database for the application.
-Run migrations and seeders:
-bash
-Code kopiëren
+
+5. Voer de migraties en seeders uit
+```CMD 
 php artisan migrate --seed
+
+
+
 6. Build Frontend Assets
 For development:
-
-bash
-Code kopiëren
 npm run dev
 For production:
-
-bash
-Code kopiëren
 npm run build
-7. Start the Development Server
-bash
-Code kopiëren
+
+
+7. Start de Development Server
+```CMD
 php artisan serve
+
+
 8. Access the Application
 Open your browser and go to:
-
-arduino
-Code kopiëren
 http://localhost:8000
 
 
