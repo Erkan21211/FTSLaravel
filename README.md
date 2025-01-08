@@ -1,7 +1,6 @@
 
 # Festival Travel System
-
-A Laravel-based system for managing festival travel bookings.
+- Een Laravel applicatie gebaseerd systeem voor het beheren van festival reisboekingen voor busmaatschappij.
 
 ## Requirements
 
@@ -48,7 +47,7 @@ A Laravel-based system for managing festival travel bookings.
 
 ### 6. Build de Frontend
     CMD: npm run dev
-## or production:
+## voor production:
     CMD: npm run build
 
 
