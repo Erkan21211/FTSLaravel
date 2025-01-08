@@ -1,3 +1,83 @@
+
+# Festival Travel System
+
+A Laravel-based system for managing festival travel bookings.
+
+## Requirements
+
+- PHP 8.x
+- Composer
+- Node.js 16.x or higher
+- MySQL
+
+---
+
+## Quick Start Guide
+
+### 1. Clone the Repository
+
+```bash
+git clone <repository-url>
+cd <repository-folder>
+2. Install Dependencies
+bash
+Code kopiëren
+composer install
+npm install
+
+3. Set Up Environment Variables
+Copy the example .env file and configure your environment:
+
+bash
+Code kopiëren
+cp .env.example .env
+Update .env with your database credentials and other app-specific details.
+4. Generate App Key
+bash
+Code kopiëren
+php artisan key:generate
+5. Set Up Database
+Create a database for the application.
+Run migrations and seeders:
+bash
+Code kopiëren
+php artisan migrate --seed
+6. Build Frontend Assets
+For development:
+
+bash
+Code kopiëren
+npm run dev
+For production:
+
+bash
+Code kopiëren
+npm run build
+7. Start the Development Server
+bash
+Code kopiëren
+php artisan serve
+8. Access the Application
+Open your browser and go to:
+
+arduino
+Code kopiëren
+http://localhost:8000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
