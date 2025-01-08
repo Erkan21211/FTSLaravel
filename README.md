@@ -31,10 +31,15 @@ cd <repository-folder>
 ``.env.example -> .env
 CMD
 DB_CONNECTION=mysql
+<br>
 DB_HOST=127.0.0.1
+<br>
 DB_PORT=3306
+<br>
 DB_DATABASE=festival_travel_system
+<br>
 DB_USERNAME=root
+<br>
 DB_PASSWORD= // of wat je wachtwoord ook is
 ``
 
