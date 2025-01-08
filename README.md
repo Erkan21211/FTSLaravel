@@ -16,37 +16,32 @@ A Laravel-based system for managing festival travel bookings.
 
 ### 1. Clone de repository
 
-    ```CMD
-git clone <repository-url>
+    CMD: git clone <repository-url>
 cd <repository-folder>
 
 
 ### 2. Install Dependencies
     
-    ```CMD
-composer install
-npm install
+    CMD: composer install
+    CMD: npm install
 
-3. opzet van de database
-    ```CMD
+### 3. opzet van de database
 
-Maak een database aan met de naam `festival_travel_system`.
-.env.example -> .env
-    ```CMD
+### Maak een database aan met de naam `festival_travel_system`.
+``.env.example -> .env
+CMD
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=festival_travel_system
 DB_USERNAME=root
 DB_PASSWORD= // of wat je wachtwoord ook is
+``
 
-    ```CMD
 
-
-4. Genereer een applicatie sleutel
+### 4. Genereer een applicatie sleutel
 zet de applicatie sleutel in de .env file
-```CMD 
-php artisan key:generate
+```CMD
 
 5. Voer de migraties en seeders uit
 ```CMD 
