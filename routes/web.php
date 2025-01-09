@@ -4,6 +4,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FestivalAdminController;
 use App\Http\Controllers\FestivalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicReizenController;
@@ -41,6 +42,18 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
 
     // Klant verwijderen
     Route::delete('/customers/{customer}', [CustomerController::class, 'destroy'])->name('admin.customers.destroy');
+
+    // Reizen Overzicht
+    Route::get('/reizen', [FestivalAdminController::class, 'index'])->name('admin.reizen.index');
+    Route::get('/reizen/create', [FestivalAdminController::class, 'create'])->name('admin.reizen.create');
+    Route::post('/reizen', [FestivalAdminController::class, 'store'])->name('admin.reizen.store');
+    Route::get('/admin/reizen/{festival}/edit', [FestivalAdminController::class, 'edit'])->name('admin.reizen.edit');
+    Route::put('/admin/reizen/{festival}', [FestivalAdminController::class, 'update'])->name('admin.reizen.update');
+    Route::delete('/admin/reizen/{festival}', [FestivalAdminController::class, 'destroy'])->name('admin.reizen.destroy');
+
+    // maak bus aan
+    Route::get('/buses/create', [FestivalAdminController::class, 'createBus'])->name('admin.buses.create');
+    Route::post('/admin/buses', [FestivalAdminController::class, 'storeBus'])->name('admin.buses.store');
 });
 
 

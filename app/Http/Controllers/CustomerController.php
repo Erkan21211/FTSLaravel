@@ -44,21 +44,27 @@ class CustomerController extends Controller
     // Sla nieuwe klant op
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
+        // Valideer de invoer
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:customers,email',
             'phone_number' => 'nullable|string|max:20',
             'password' => 'required|string|min:8',
         ]);
 
+        // Maak een nieuwe klant aan
         Customer::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone_number' => $request->phone_number,
-            'password' => bcrypt($request->password),
+            'first_name' => $validated['first_name'],
+            'last_name' => $validated['last_name'],
+            'email' => $validated['email'],
+            'phone_number' => $validated['phone_number'],
+            'password' => bcrypt($validated['password']),
         ]);
 
-        return redirect()->route('admin.customers.index')->with('success', 'Nieuwe klant succesvol toegevoegd.');
+        // Redirect naar klantenlijst met succesbericht
+        return redirect()->route('admin.customers.index')
+            ->with('success', 'Klant succesvol toegevoegd!');
     }
 
     // Verwijder een klant

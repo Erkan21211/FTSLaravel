@@ -16,18 +16,21 @@
                 <h1 class="text-2xl font-bold mb-4">Welkom, {{ auth()->user()->first_name }}</h1>
                 <p class="text-gray-600">Hier kunt u klanten, reizen en het puntensysteem beheren.</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-                    <a href="{{ route('admin.customers.index') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-center">
+                    <a href="{{ route('admin.customers.index') }}"
+                       class="bg-blue-500 hover:bg-blue-600 text-black font-bold py-4 px-6 rounded text-center shadow-md">
                         Klanten Beheren
                     </a>
-                    <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-center">
+                    <a href="#"
+                       class="bg-green-500 hover:bg-green-600 text-black font-bold py-4 px-6 rounded text-center shadow-md">
                         Reizen Beheren
                     </a>
-                    <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-center">
+                    <a href="#"
+                       class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-4 px-6 rounded text-center shadow-md">
                         Puntensysteem Beheren
                     </a>
                 </div>
             @else
-                <!-- Regular User Dashboard Content -->
+                <!-- Normale gebruiker Dashboard Content -->
                 <div class="flex gap-4 mb-6">
                     <a href="{{ route('bookings.index') }}"
                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-md transition">
@@ -43,7 +46,7 @@
                     <p>Je hebt <strong>{{ auth()->user()->points }}</strong> punten.</p>
                 </div>
 
-                <!-- Search Functionality -->
+                <!-- zoek functie -->
                 <div class="mb-6">
                     <form method="GET" action="{{ route('dashboard') }}">
                         <input type="text" name="query" placeholder="Zoek reizen..."
