@@ -28,4 +28,13 @@ class DashboardController extends Controller
 
         return view('dashboard.index', compact('user', 'searchResults'));
     }
+
+    /**
+     * Toon het admin-dashboard.
+     */
+    public function admin()
+    {
+        $admin = Auth::user();
+        return view('admin.dashboard', compact('admin'));
+    }
 }
