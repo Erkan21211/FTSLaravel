@@ -20,13 +20,13 @@
                        class="bg-blue-500 hover:bg-blue-600 text-black font-bold py-4 px-6 rounded text-center shadow-md">
                         Klanten Beheren
                     </a>
-                    <a href="#"
+                    <a href="{{ route('admin.reizen.index') }}"
                        class="bg-green-500 hover:bg-green-600 text-black font-bold py-4 px-6 rounded text-center shadow-md">
                         Reizen Beheren
                     </a>
-                    <a href="#"
+                    <a href="{{ route('admin.points.index') }}"
                        class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-4 px-6 rounded text-center shadow-md">
-                        Puntensysteem Beheren
+                        Punten Beheren
                     </a>
                 </div>
             @else

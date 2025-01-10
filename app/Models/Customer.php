@@ -29,5 +29,4 @@ class Customer extends Authenticatable
     {
         return $this->is_admin;
     }
-
 }

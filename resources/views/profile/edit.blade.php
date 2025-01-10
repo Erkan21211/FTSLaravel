@@ -55,7 +55,7 @@
                     <div class="mt-4">
                         <x-input-label for="phone_number" :value="__('Telefoonnummer')"/>
                         <x-text-input id="phone_number" type="text" name="phone_number"
-                                      value="{{ old('phone_number', $customer->phone_number) }}"/>
+                                      value="{{ old('phone_number', $customer->phone_number) }}" required/>
                         <x-input-error :messages="$errors->get('phone_number')" class="mt-2"/>
                     </div>
 

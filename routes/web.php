@@ -43,6 +43,11 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     // Klant verwijderen
     Route::delete('/customers/{customer}', [CustomerController::class, 'destroy'])->name('admin.customers.destroy');
 
+    // Klantpunten beheren
+    route::get('/customers/points/list', [CustomerController::class, 'showPoints'])->name('admin.points.index');
+    Route::get('/customers/{customer}/points', [CustomerController::class, 'editPoints'])->name('admin.points.edit');
+    Route::put('/customers/{customer}/points', [CustomerController::class, 'updatePoints'])->name('admin.points.update');
+
     // Reizen Overzicht
     Route::get('/reizen', [FestivalAdminController::class, 'index'])->name('admin.reizen.index');
     Route::get('/reizen/create', [FestivalAdminController::class, 'create'])->name('admin.reizen.create');
@@ -78,7 +83,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/reizen/{busPlanning}/redeem', [BookingController::class, 'redeemPoints'])->name('reizen.redeem');
 
 
-    // Booking management
+    // Booking manage routes
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index'); // Geschiedenis
     Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store'); // Boeking opslaan
     Route::get('/bookings/{booking}', [BookingController::class, 'show'])->name('bookings.show'); // Details busrit pagina

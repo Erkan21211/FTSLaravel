@@ -13,20 +13,20 @@
                 </div>
             @endif
 
-                <!-- Knoppen en formulier -->
-                <div class="mb-6 flex gap-4">
-                    <!-- Nieuwe Reis Toevoegen -->
-                    <a href="{{ route('admin.reizen.create') }}"
-                       class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-md transition">
-                        Nieuwe Reis Toevoegen
-                    </a>
+            <!-- Knoppen en formulier -->
+            <div class="mb-6 flex gap-4">
+                <!-- Nieuwe Reis Toevoegen -->
+                <a href="{{ route('admin.reizen.create') }}"
+                   class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-md transition">
+                    Nieuwe Reis Toevoegen
+                </a>
 
-                    <!-- Nieuwe Bus Toevoegen -->
-                    <a href="{{ route('admin.buses.create') }}"
-                       class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded shadow-md transition">
-                        Nieuwe Bus Toevoegen
-                    </a>
-                </div>
+                <!-- Nieuwe Bus Toevoegen -->
+                <a href="{{ route('admin.buses.create') }}"
+                   class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded shadow-md transition">
+                    Nieuwe Bus Toevoegen
+                </a>
+            </div>
 
             <!-- Reizen Overzicht -->
             <table class="w-full text-gray-300 border-collapse">

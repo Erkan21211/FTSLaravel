@@ -27,6 +27,7 @@ class RegistrationController extends Controller
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:customers'],
+            'phone_number' => ['nullable', 'string', 'max:255'],
             'password' => [
                 'required',
                 'string',
@@ -50,6 +51,7 @@ class RegistrationController extends Controller
             'last_name' => $request->input('last_name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
+            'phone_number' => $request->input('phone_number'),
         ]);
 
         // Redirect to the login page with a success message

@@ -74,4 +74,59 @@ class CustomerController extends Controller
 
         return redirect()->route('admin.customers.index')->with('success', 'Klant succesvol verwijderd.');
     }
+
+
+
+    // Toon klantpunten
+    public function showPoints(Customer $customer)
+    {
+        $customers = Customer::all();
+
+        return view('admin.points.index', compact('customers'));
+    }
+
+
+
+    public function editPoints(Customer $customer)
+    {
+        return view('admin.points.edit', compact('customer'));
+    }
+
+    public function updatePoints(Request $request, Customer $customer)
+    {
+        $request->validate([
+            'points' => 'required|integer|min:0',
+        ]);
+
+        $customer->points = $request->input('points');
+        $customer->save();
+
+        return redirect()->route('admin.points.index')->with('success', 'Punten succesvol bijgewerkt.');
+    }
+
+    // klantpunten regels
+//    public function editRules()
+//    {
+//        // Stel standaard regels in, of haal ze uit de database/configuratie
+//        $rules = [
+//            'earn_points_per_booking' => config('points.earn_points_per_booking', 10),
+//            'redeem_points_discount' => config('points.redeem_points_discount', 5),
+//        ];
+//
+//        return view('admin.points.rules', compact('rules'));
+//    }
+//
+//    public function updateRules(Request $request)
+//    {
+//        $request->validate([
+//            'earn_points_per_booking' => 'required|integer|min:1',
+//            'redeem_points_discount' => 'required|numeric|min:0',
+//        ]);
+//
+//        // Update regels in de configuratie of database
+//        config(['points.earn_points_per_booking' => $request->input('earn_points_per_booking')]);
+//        config(['points.redeem_points_discount' => $request->input('redeem_points_discount')]);
+//
+//        return redirect()->route('admin.points.index')->with('success', 'Puntenregels succesvol bijgewerkt.');
+//    }
 }
