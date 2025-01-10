@@ -34,7 +34,10 @@ class DashboardController extends Controller
      */
     public function admin()
     {
-        $admin = Auth::user();
-        return view('admin.dashboard', compact('admin'));
+        if (!auth()->user()->is_admin) {
+            abort(403, 'Onbevoegde toegang.');
+        }
+
+        return view('dashboard.admin');
     }
 }

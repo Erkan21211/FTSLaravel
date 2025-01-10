@@ -39,6 +39,7 @@
                     <th class="border-b border-gray-600 p-4 text-left">Kosten</th>
                     <th class="border-b border-gray-600 p-4 text-left">Beschikbare Stoelen</th>
                     <th class="border-b border-gray-600 p-4 text-left">Bus</th>
+                    <th class="border-b border-gray-600 p-4 text-left">Acties</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -56,6 +57,22 @@
                         <td class="border-b border-gray-600 p-4">{{ $busPlanning->bus->name }}
                             ({{ $busPlanning->bus->capacity }} zitplaatsen)
                         </td>
+                        <td class="border-b border-gray-600 p-4">
+                            <a href="{{ route('admin.reizen.edit', $busPlanning->festival->id) }}"
+                               class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-md transition">
+                                Bewerken
+                            </a>
+                            <form method="POST" action="{{ route('admin.reizen.destroy', $busPlanning->festival->id) }}"
+                                  class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                        class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded shadow-md transition">
+                                    Verwijderen
+                                </button>
+                            </form>
+                        </td>
+
                     </tr>
                 @endforeach
                 </tbody>
