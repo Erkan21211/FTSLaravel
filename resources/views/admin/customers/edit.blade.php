@@ -21,6 +21,11 @@
                         </div>
 
                         <div class="mb-4">
+                            <label for="name" class="block text-sm font-medium text-gray-700">Achternaam</label>
+                            <input type="text" name="last_name" id="last_name" value="{{ $customer->last_name }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
+                        </div>
+
+                        <div class="mb-4">
                             <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
                             <input type="email" name="email" id="email" value="{{ $customer->email }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
                         </div>

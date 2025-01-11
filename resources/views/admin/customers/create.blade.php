@@ -9,6 +9,19 @@
         <div class="bg-white shadow-md rounded-lg p-6">
             <h1 class="text-2xl font-bold mb-4">Nieuwe Klant Toevoegen</h1>
 
+            @if ($errors->any())
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">
+                    <strong class="font-bold">Oeps!</strong>
+                    <span class="block sm:inline">Er waren problemen met je invoer.</span>
+                    <ul class="mt-2 list-disc pl-5 text-sm">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+
             <form method="POST" action="{{ route('admin.customers.store') }}" class="space-y-4">
                 @csrf
 

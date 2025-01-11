@@ -26,11 +26,12 @@ class CustomerController extends Controller
     {
         $request->validate([
             'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:customers,email,' . $customer->id,
             'phone_number' => 'nullable|string|max:20',
         ]);
 
-        $customer->update($request->only(['name', 'email', 'phone_number']));
+        $customer->update($request->only(['first_name', 'last_name', 'email', 'phone_number']));
 
         return redirect()->route('admin.customers.index')->with('success', 'Klantgegevens succesvol bijgewerkt.');
     }
