@@ -40,6 +40,7 @@
                         <td class="border-b border-gray-600 p-4">{{ $customer->phone_number }}</td>
                         <td class="border-b border-gray-600 p-4">
                             <a href="{{ route('admin.customers.edit', $customer->id) }}" class="text-blue-500 hover:underline">Bewerken</a>
+                            <a href="{{ route('admin.customers.history', $customer->id) }}" class="text-green-500 hover:underline">Reisgeschiedenis</a>
                             <form action="{{ route('admin.customers.destroy', $customer->id) }}" method="POST" style="display: inline-block;">
                                 @csrf
                                 @method('DELETE')

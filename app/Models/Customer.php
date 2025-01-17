@@ -29,4 +29,11 @@ class Customer extends Authenticatable
     {
         return $this->is_admin;
     }
+
+    // de klant heeft veel boekingen
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'customer_id');
+    }
+
 }

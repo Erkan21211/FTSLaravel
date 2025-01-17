@@ -35,6 +35,8 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     // Klant bewerken
     Route::get('/customers/{customer}/edit', [CustomerController::class, 'edit'])->name('admin.customers.edit');
     Route::put('/customers/{customer}', [CustomerController::class, 'update'])->name('admin.customers.update');
+    Route::get('/customers/{customer}/history', [CustomerController::class, 'showHistory'])->name('admin.customers.history');
+
 
     // Klant toevoegen
     Route::get('/customers/create', [CustomerController::class, 'create'])->name('admin.customers.create');
