@@ -13,46 +13,47 @@
                 </div>
             @endif
 
-
             <!-- Knop om een nieuwe klant toe te voegen -->
-            <div class="mb-6 bg-sky-500">
+            <div class="mb-6">
                 <a href="{{ route('admin.customers.create') }}"
-                   class="text-white font-bold py-2 px-4 rounded shadow-md transition">
+                   class="bg-sky-500 text-white font-bold py-2 px-4 rounded shadow-md transition hover:bg-sky-600">
                     Nieuwe Klant Toevoegen
                 </a>
             </div>
 
-            <!-- Klantenoverzicht -->
-            <table class="w-full text-white border-collapse">
-                <thead>
-                <tr class="bg-gray-700 text-gray-300">
-                    <th class="border-b border-gray-600 p-4 text-left">Naam</th>
-                    <th class="border-b border-gray-600 p-4 text-left">E-mail</th>
-                    <th class="border-b border-gray-600 p-4 text-left">Telefoon</th>
-                    <th class="border-b border-gray-600 p-4 text-left">Acties</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach ($customers as $customer)
-                    <tr>
-                        <td class="border-b border-gray-600 p-4">{{ $customer->first_name . ' ' . $customer->last_name }}</td>
-                        <td class="border-b border-gray-600 p-4">{{ $customer->email }}</td>
-                        <td class="border-b border-gray-600 p-4">{{ $customer->phone_number }}</td>
-                        <td class="border-b border-gray-600 p-4">
-                            <a href="{{ route('admin.customers.edit', $customer->id) }}" class="text-blue-500 hover:underline">Bewerken</a>
-                            <a href="{{ route('admin.customers.history', $customer->id) }}" class="text-green-500 hover:underline">Reisgeschiedenis</a>
-                            <form action="{{ route('admin.customers.destroy', $customer->id) }}" method="POST" style="display: inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-500 hover:underline"
-                                        onclick="return confirm('Weet je zeker dat je deze klant wilt verwijderen?')">Verwijderen
-                                </button>
-                            </form>
-                        </td>
+            <!-- Responsive Tabel -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-white border-collapse">
+                    <thead>
+                    <tr class="bg-gray-700 text-gray-300">
+                        <th class="border-b border-gray-600 p-4 text-left">Naam</th>
+                        <th class="border-b border-gray-600 p-4 text-left">E-mail</th>
+                        <th class="border-b border-gray-600 p-4 text-left">Telefoon</th>
+                        <th class="border-b border-gray-600 p-4 text-left">Acties</th>
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach ($customers as $customer)
+                        <tr class="hover:bg-gray-700 transition">
+                            <td class="border-b border-gray-600 p-4 truncate">{{ $customer->first_name . ' ' . $customer->last_name }}</td>
+                            <td class="border-b border-gray-600 p-4 truncate">{{ $customer->email }}</td>
+                            <td class="border-b border-gray-600 p-4 truncate">{{ $customer->phone_number }}</td>
+                            <td class="border-b border-gray-600 p-4 whitespace-nowrap">
+                                <a href="{{ route('admin.customers.edit', $customer->id) }}" class="text-blue-500 hover:underline">Bewerken</a>
+                                <a href="{{ route('admin.customers.history', $customer->id) }}" class="text-green-500 hover:underline">Reisgeschiedenis</a>
+                                <form action="{{ route('admin.customers.destroy', $customer->id) }}" method="POST" style="display: inline-block;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-500 hover:underline"
+                                            onclick="return confirm('Weet je zeker dat je deze klant wilt verwijderen?')">Verwijderen
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </x-app-layout>

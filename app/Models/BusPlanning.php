@@ -33,4 +33,9 @@ class BusPlanning extends Model
     {
         return $this->belongsTo(Bus::class);
     }
+
+    public function getAvailableSeatsAttribute()
+    {
+        return $this->capacity - $this->seats_filled;
+    }
 }

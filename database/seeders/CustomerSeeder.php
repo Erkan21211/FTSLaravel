@@ -14,6 +14,7 @@ class CustomerSeeder extends Seeder
             'last_name' => 'Aslantas',
             'email' => 'erkan@example.com',
             'password' => bcrypt('password123'),
+            'phone_number' => '0612345678',
         ]);
     }
 }

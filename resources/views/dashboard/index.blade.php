@@ -55,28 +55,28 @@
                         @if (isset($searchResults))
                             <div class="bg-gray-500 shadow-md rounded-lg p-6 mt-6">
                                 @if ($searchResults->isNotEmpty())
-                                    <table class="w-full text-gray-300">
-                                        <thead>
-                                        <tr>
-                                            <th class="border-b text-black border-gray-600 p-2 text-left">Festivalnaam</th>
-                                            <th class="border-b text-black border-gray-600 p-2 text-left">Locatie</th>
-                                            <th class="border-b text-black border-gray-600 p-2 text-left">Startdatum</th>
-                                            <th class="border-b text-black border-gray-600 p-2 text-left">Einddatum</th>
-                                            <th class="border-b text-black border-gray-600 p-2 text-left">Beschikbare stoelen</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach ($searchResults as $result)
+                                    <div class="overflow-x-auto">
+                                        <table class="w-full text-gray-300">
+                                            <thead>
                                             <tr>
-                                                <td class="p-2 text-black" >{{ $result->name }}</td>
-                                                <td class="p-2 text-black">{{ $result->location }}</td>
-                                                <td class="p-2 text-black">{{ $result->start_date }}</td>
-                                                <td class="p-2 text-black">{{ $result->end_date }}</td>
-                                                <td class="p-2 text-black">{{ $result->available_seats }}</td>
+                                                <th class="border-b text-black border-gray-600 p-2 text-left">Festivalnaam</th>
+                                                <th class="border-b text-black border-gray-600 p-2 text-left">Locatie</th>
+                                                <th class="border-b text-black border-gray-600 p-2 text-left">Startdatum</th>
+                                                <th class="border-b text-black border-gray-600 p-2 text-left">Einddatum</th>
                                             </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                            @foreach ($searchResults as $result)
+                                                <tr>
+                                                    <td class="p-2 text-black" >{{ $result->name }}</td>
+                                                    <td class="p-2 text-black">{{ $result->location }}</td>
+                                                    <td class="p-2 text-black">{{ $result->start_date }}</td>
+                                                    <td class="p-2 text-black">{{ $result->end_date }}</td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 @else
                                     <p class="text-gray-400">Geen resultaten gevonden voor "{{ request('query') }}".</p>
                                 @endif

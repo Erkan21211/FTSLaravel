@@ -23,46 +23,48 @@
                 @if($bookings->isEmpty())
                     <p class="text-gray-600">{{ __('Je hebt nog geen boekingen.') }}</p>
                 @else
-                    <table class="w-full table-auto border-collapse">
-                        <thead>
-                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                            <th class="py-3 px-6 text-left">Festivalnaam</th>
-                            <th class="py-3 px-6 text-left">Datum en Tijd</th>
-                            <th class="py-3 px-6 text-right">Kosten</th>
-                            <th class="py-3 px-6 text-center">Status</th>
-                            <th class="py-3 px-6 text-center">Actie</th>
-                        </tr>
-                        </thead>
-                        <tbody class="text-gray-600 text-sm font-light">
-                        @foreach ($bookings as $booking)
-                            <tr class="border-b border-gray-200 hover:bg-gray-100">
-                                <td class="py-3 px-6 text-left whitespace-nowrap">{{ $booking->festival->name }}</td>
-                                <td class="py-3 px-6 text-left">{{ $booking->booking_date }}</td>
-                                <td class="py-3 px-6 text-right">€{{ number_format($booking->cost, 2) }}</td>
-                                <td class="py-3 px-6 text-center">
-                                        <span class="py-1 px-3 rounded-full text-xs font-medium
-                                            {{ $booking->status === 'actief' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700' }}">
-                                            {{ ucfirst($booking->status) }}
-                                        </span>
-                                </td>
-                                <td class="py-3 px-6 text-center">
-                                    @if ($booking->status === 'actief')
-                                        <form method="POST" action="{{ route('bookings.cancel', $booking->id) }}">
-                                            @csrf
-                                            @method('PATCH')
-                                            <button type="submit"
-                                                    class="bg-red-500 text-black py-1 px-3 rounded text-xs font-medium hover:bg-red-600">
-                                                Annuleren
-                                            </button>
-                                        </form>
-                                    @else
-                                        <span class="text-gray-500 text-xs">Niet beschikbaar</span>
-                                    @endif
-                                </td>
+                    <div class="overflow-x-auto">
+                        <table class="w-full table-auto border-collapse">
+                            <thead>
+                            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                                <th class="py-3 px-6 text-left">Festivalnaam</th>
+                                <th class="py-3 px-6 text-left">Datum en Tijd</th>
+                                <th class="py-3 px-6 text-right">Kosten</th>
+                                <th class="py-3 px-6 text-center">Status</th>
+                                <th class="py-3 px-6 text-center">Actie</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody class="text-gray-600 text-sm font-light">
+                            @foreach ($bookings as $booking)
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left whitespace-nowrap">{{ $booking->festival->name }}</td>
+                                    <td class="py-3 px-6 text-left">{{ $booking->booking_date }}</td>
+                                    <td class="py-3 px-6 text-right">€{{ number_format($booking->cost, 2) }}</td>
+                                    <td class="py-3 px-6 text-center">
+                                            <span class="py-1 px-3 rounded-full text-xs font-medium
+                                                {{ $booking->status === 'actief' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700' }}">
+                                                {{ ucfirst($booking->status) }}
+                                            </span>
+                                    </td>
+                                    <td class="py-3 px-6 text-center">
+                                        @if ($booking->status === 'actief')
+                                            <form method="POST" action="{{ route('bookings.cancel', $booking->id) }}">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit"
+                                                        class="bg-red-500 text-black py-1 px-3 rounded text-xs font-medium hover:bg-red-600">
+                                                    Annuleren
+                                                </button>
+                                            </form>
+                                        @else
+                                            <span class="text-gray-500 text-xs">Niet beschikbaar</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 @endif
             </div>
         </div>

@@ -97,5 +97,5 @@ Route::middleware('auth')->group(function () {
 Route::get('/register', [RegistrationController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegistrationController::class, 'register'])->name('register.submit');
 
-// Include Default Authentication Routes
+// Default Authentication Routes
 require __DIR__ . '/auth.php';

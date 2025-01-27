@@ -16,7 +16,6 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         $searchResults = null;
-
         // Controleer of er een zoekopdracht is
 
         if ($request->has('query')) {
