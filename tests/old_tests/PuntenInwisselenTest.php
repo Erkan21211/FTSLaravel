@@ -15,36 +15,49 @@ class PuntenInwisselenTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function gebruiker_kan_punten_inwisselen_voor_een_boeking()
+    public function test_gebruiker_kan_punten_inwisselen_voor_een_boeking()
     {
+        // Arrange: Maak een gebruiker met voldoende punten aan
         $user = Customer::factory()->create(['points' => 100]);
         $this->actingAs($user);
 
+        // Arrange: Maak een festival, bus, en busplanning aan
         $festival = Festival::factory()->create();
         $bus = Bus::factory()->create();
         $busPlanning = BusPlanning::factory()->create([
-            'festival_id' => $festival->id,
-            'bus_id' => $bus->id,
-            'available_seats' => 10,
-            'cost_per_seat' => 50,
-            'seats_filled' => 0,
+            'available_seats' => 10, // Stel beschikbare stoelen in
+            'seats_filled' => 0,    // Geen stoelen gevuld
+            'cost_per_seat' => 50,  // Kosten per stoel
         ]);
 
+        dd($busPlanning->toArray());
+
+        // Act: Voer de POST-aanroep uit om punten in te wisselen
         $response = $this->post(route('reizen.redeem', $busPlanning->id), [
             'bus_planning_id' => $busPlanning->id,
         ]);
 
+        // Assert: Controleer de redirect en success-bericht
         $response->assertRedirect(route('bookings.index'));
-        $response->assertSessionHas('success', "Je hebt 50.00 punten ingewisseld voor deze boeking!");
+        $response->assertSessionHas('success', "Je hebt 50 punten ingewisseld voor deze boeking!");
 
+        // Fetch de meest recente BusPlanning data
+        $updatedBusPlanning = BusPlanning::find($busPlanning->id);
+
+        // Debug: Controleer de waarde na de POST-aanroep
+        $this->assertEquals(1, $updatedBusPlanning->seats_filled, 'Seats filled was not incremented.');
+        $this->assertEquals(10, $updatedBusPlanning->available_seats, 'Available seats should not change.');
+
+        // Assert: Controleer of de boeking in de database is aangemaakt
         $this->assertDatabaseHas('bookings', [
             'customer_id' => $user->id,
             'bus_planning_id' => $busPlanning->id,
             'status' => 'actief',
         ]);
 
+        // Debug: Controleer de punten van de gebruiker
         $user->refresh();
-        $this->assertEquals(50, $user->points);
+        $this->assertEquals(50, $user->points, 'User points were not deducted correctly.');
     }
 
     /** @test */
