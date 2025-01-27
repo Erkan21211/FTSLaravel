@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Booking;
 use App\Models\Bus;
 use App\Models\BusPlanning;
+use App\Models\Customer;
 use App\Models\Festival;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,19 +17,15 @@ class BusPlanningSeeder extends Seeder
      */
     public function run(): void
     {
-        $festivals = Festival::all();
-        $buses = Bus::all();
+        $busPlanning = BusPlanning::factory()->create();
+        $customer = Customer::factory()->create();
 
-        foreach ($festivals as $festival) {
-            foreach ($buses as $bus) {
-                BusPlanning::factory()->create([
-                    'festival_id' => $festival->id,
-                    'bus_id' => $bus->id,
-                    'available_seats' => 50,
-                    'cost_per_seat' => rand(20, 100),
-                    'seats_filled' => rand(0, 25),
-                ]);
-            }
-        }
+        Booking::factory()->create([
+            'bus_planning_id' => $busPlanning->id,
+            'customer_id' => $customer->id,
+            'festival_id' => $busPlanning->festival_id,
+            'cost' => $busPlanning->cost_per_seat,
+            'status' => 'actief',
+        ]);
     }
 }

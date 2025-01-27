@@ -38,6 +38,7 @@ class BookingController extends Controller
 
     public function store(Request $request, BusPlanning $busPlanning)
     {
+
         // Controleer of de gebruiker al een actieve boeking heeft voor deze busrit
         $existingBooking = Booking::where('customer_id', auth()->id())
             ->where('bus_planning_id', $busPlanning->id)
@@ -137,15 +138,22 @@ class BookingController extends Controller
     // Inwisselen van punten voor een boeking
     public function redeemPoints(Request $request, BusPlanning $busPlanning)
     {
+
         $user = auth()->user();
 
         // Haal de benodigde punten op
         $requiredPoints = $busPlanning->cost_per_seat;
 
-        // Controleer of de gebruiker voldoende punten heeft
         if ($user->points < $requiredPoints) {
             return redirect()->route('reizen.show', $busPlanning->id)->withErrors([
                 'message' => 'Onvoldoende punten om deze boeking te maken.',
+            ]);
+        }
+
+        // Controleer of er nog stoelen beschikbaar zijn
+        if ($busPlanning->fresh()->seats_filled >= $busPlanning->available_seats) {
+            return redirect()->route('reizen.show', $busPlanning->id)->withErrors([
+                'message' => 'Geen beschikbare stoelen meer.',
             ]);
         }
 

@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
             $table->foreignId('festival_id')->constrained('festivals')->onDelete('cascade');
-            $table->foreignId('bus_planning_id')->nullable()->constrained('bus_planning')->onDelete('cascade');
+            $table->foreignId('bus_planning_id')->constrained('bus_planning')->onDelete('cascade');
             $table->dateTime('booking_date');
             $table->decimal('cost', 8, 2);
             $table->string('status')->default('actief');

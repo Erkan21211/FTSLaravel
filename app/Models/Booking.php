@@ -31,7 +31,7 @@ class Booking extends Model
 
     public function bus()
     {
-        return $this->busPlanning->belongsTo(Bus::class);
+        return $this->hasOneThrough(Bus::class, BusPlanning::class, 'id', 'id', 'bus_planning_id', 'bus_id');
     }
 
     public function busPlanning()

@@ -12,8 +12,7 @@ class BusPlanning extends Model
     /** @use HasFactory<\Database\Factories\BusPlanningFactory> */
     use HasFactory;
 
-    protected $table = 'bus_planning'; // Verwijst naar de juiste tabel
-
+    protected $table = 'bus_planning';
     protected $fillable = [
         'festival_id',
         'bus_id',
@@ -22,6 +21,7 @@ class BusPlanning extends Model
         'available_seats',
         'cost_per_seat',
         'seats_filled',
+
     ];
 
     public function festival()

@@ -1,14 +1,12 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\old_tests;
 
-use App\Models\Booking;
 use App\Models\Bus;
 use App\Models\BusPlanning;
 use App\Models\Customer;
 use App\Models\Festival;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class PuntenTest extends TestCase

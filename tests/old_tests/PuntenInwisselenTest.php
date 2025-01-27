@@ -1,8 +1,7 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\old_tests;
 
-use App\Models\Booking;
 use App\Models\Bus;
 use App\Models\BusPlanning;
 use App\Models\Customer;
