@@ -1,63 +1,87 @@
 
 # Festival Travel System
-- Een Laravel applicatie gebaseerd systeem voor het beheren van festival reisboekingen voor busmaatschappij.
+Een Laravel-applicatie voor het beheren van festivalreisboekingen voor een busmaatschappij.
 
-## Requirements
+## Vereisten
 
-- PHP 8.x
-- Composer
-- Node.js 16.x or higher
-- MySQL
+- **PHP** 8.x
+- **Composer**
+- **Node.js** 16.x of hoger
+- **MySQL**
 
 ---
 
-## Quick Start Guide
+## Snelle Installatiegids
 
 ### 1. Clone de repository
 
-    CMD: git clone <repository-url>
-    cd <repository-folder>
+```sh
+ git clone <repository-url>
+ cd <repository-folder>
+```
 
+### 2. Installeer de afhankelijkheden
 
-### 2. Install Dependencies
-    
-    CMD: composer install
-    CMD: npm install
+```sh
+ composer install
+ npm install
+```
 
-### 3. opzet van de database
-## Maak een database aan met de naam `festival_travel_system`.
-# .env.example -> .env
-#
-    DB_CONNECTION=mysql
-    DB_HOST=127.0.0.1
-    DB_PORT=3306
-    DB_DATABASE=festival_travel_system
-    DB_USERNAME=root
-    DB_PASSWORD= // of wat je wachtwoord ook is
+### 3. Database configureren
 
-#
-### 4. Genereer een applicatie sleutel
-## zet de applicatie sleutel in de .env file
-    CMD: php artisan key:generate
+1. Maak een database aan met de naam `festival_travel_system`.
+2. Kopieer het `.env.example` bestand naar `.env`:
 
-### 5. Voer de migraties en seeders uit
-    CMD: php artisan migrate --seed
+   ```sh
+   cp .env.example .env
+   ```
 
+3. Open het `.env`-bestand en pas de database-instellingen aan:
 
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=festival_travel_system
+   DB_USERNAME=root
+   DB_PASSWORD= # Vul hier je wachtwoord in
+   ```
 
-### 6. Build de Frontend
-    CMD: npm run dev
-## voor production:
-    CMD: npm run build
+### 4. Genereer een applicatiesleutel
 
+```sh
+ php artisan key:generate
+```
 
-### 7. Start de Development Server
-    CMD php artisan serve
+### 5. Voer de database migraties en seeders uit
 
+```sh
+ php artisan migrate --seed
+```
 
-### 8. Toegang tot de applicatie
-## open je browser en ga naar:
-    cmd: http://localhost:8000
+### 6. Build de frontend
+
+Voor ontwikkeling:
+```sh
+ npm run dev
+```
+
+Voor productie:
+```sh
+ npm run build
+```
+
+### 7. Start de ontwikkelserver
+
+```sh
+ php artisan serve
+```
+
+### 8. Open de applicatie
+
+Open je browser en ga naar:
+```sh
+ http://localhost:8000
 
 
 
