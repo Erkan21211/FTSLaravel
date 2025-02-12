@@ -54,9 +54,9 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/reizen', [FestivalAdminController::class, 'index'])->name('admin.reizen.index');
     Route::get('/reizen/create', [FestivalAdminController::class, 'create'])->name('admin.reizen.create');
     Route::post('/reizen', [FestivalAdminController::class, 'store'])->name('admin.reizen.store');
-    Route::get('/admin/reizen/{festival}/edit', [FestivalAdminController::class, 'edit'])->name('admin.reizen.edit');
-    Route::put('/admin/reizen/{festival}', [FestivalAdminController::class, 'update'])->name('admin.reizen.update');
-    Route::delete('/admin/reizen/{festival}', [FestivalAdminController::class, 'destroy'])->name('admin.reizen.destroy');
+    Route::get('/reizen/{festival}/edit', [FestivalAdminController::class, 'edit'])->name('admin.reizen.edit');
+    Route::put('/reizen/{festival}', [FestivalAdminController::class, 'update'])->name('admin.reizen.update');
+    Route::delete('/reizen/{festival}', [FestivalAdminController::class, 'destroy'])->name('admin.reizen.destroy');
 
     // maak bus aan
     Route::get('/buses/create', [FestivalAdminController::class, 'createBus'])->name('admin.buses.create');

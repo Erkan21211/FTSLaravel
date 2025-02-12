@@ -41,7 +41,7 @@ class FestivalAdminController extends Controller
             'end_date' => 'required|date|after_or_equal:start_date',
             'cost_per_seat' => 'required|numeric|min:0',
             'available_seats' => 'required|integer|min:1',
-            'bus_id' => 'required|exists:buses,id', // Zorg ervoor dat een bus geselecteerd wordt
+            'bus_id' => 'required|exists:buses,id',
         ]);
 
         // Maak een nieuw festival aan
@@ -86,24 +86,62 @@ class FestivalAdminController extends Controller
 
     public function edit(Festival $festival)
     {
+        $festival->load('busPlanning'); // Laad de busPlanning mee
+
         return view('admin.reizen.edit', compact('festival'));
     }
 
+
     public function update(Request $request, Festival $festival)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'location' => 'required|string|max:255',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-            'cost_per_seat' => 'required|numeric|min:0',
-            'available_seats' => 'required|integer|min:1',
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'location' => 'required|string|max:255',
+                'start_date' => 'required|date',
+                'end_date' => 'required|date|after_or_equal:start_date',
+                'cost_per_seat' => 'required|numeric|min:0',
+                'available_seats' => 'required|integer|min:1',
+                'bus_id' => 'required|exists:buses,id',
+            ]);
 
-        $festival->update($request->all());
+            // Update Festival
+            $festival->update([
+                'name' => $request->name,
+                'location' => $request->location,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+            ]);
 
-        return redirect()->route('admin.reizen.index')->with('success', 'Reis succesvol bijgewerkt.');
+            // Update of maak een nieuwe BusPlanning
+            $busPlanning = BusPlanning::where('festival_id', $festival->id)->first();
+            if ($busPlanning) {
+                $busPlanning->update([
+                    'bus_id' => $request->bus_id,
+                    'departure_time' => $request->start_date,
+                    'departure_location' => $request->location,
+                    'available_seats' => $request->available_seats,
+                    'cost_per_seat' => $request->cost_per_seat,
+                ]);
+            } else {
+                BusPlanning::create([
+                    'festival_id' => $festival->id,
+                    'bus_id' => $request->bus_id,
+                    'departure_time' => $request->start_date,
+                    'departure_location' => $request->location,
+                    'available_seats' => $request->available_seats,
+                    'cost_per_seat' => $request->cost_per_seat,
+                ]);
+            }
+
+            return redirect()->route('admin.reizen.index')->with('success', 'Reis succesvol bijgewerkt.');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Er is een fout opgetreden: ' . $e->getMessage()]);
+        }
     }
+
+
+
 
     public function destroy(Festival $festival)
     {

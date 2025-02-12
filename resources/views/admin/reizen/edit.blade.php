@@ -33,12 +33,23 @@
 
                 <div>
                     <label for="cost_per_seat" class="block text-sm font-medium text-white">Kosten per stoel</label>
-                    <input type="number" step="0.01" name="cost_per_seat" id="cost_per_seat" value="{{ $festival->cost_per_seat }}" class="mt-1 block w-full p-2 rounded bg-gray-700 text-black" required>
+                    <input type="number" step="0.01" name="cost_per_seat" id="cost_per_seat" value="{{ $festival->busPlanning->cost_per_seat ?? '' }}" class="mt-1 block w-full p-2 rounded bg-gray-700 text-black" required>
                 </div>
 
                 <div>
                     <label for="available_seats" class="block text-sm font-medium text-white">Beschikbare stoelen</label>
-                    <input type="number" name="available_seats" id="available_seats" value="{{ $festival->available_seats }}" class="mt-1 block w-full p-2 rounded bg-gray-700 text-black" required>
+                    <input type="number" name="available_seats" id="available_seats" value="{{ $festival->busPlanning->available_seats ?? '' }}" class="mt-1 block w-full p-2 rounded bg-gray-700 text-black" required>
+                </div>
+
+                <div>
+                    <label for="bus_id" class="block text-sm font-medium text-white">Bus</label>
+                    <select name="bus_id" id="bus_id" class="mt-1 block w-full p-2 rounded bg-gray-700 text-black" required>
+                        @foreach(App\Models\Bus::all() as $bus)
+                            <option value="{{ $bus->id }}" {{ ($festival->busPlanning->bus_id ?? '') == $bus->id ? 'selected' : '' }}>
+                                {{ $bus->name }} ({{ $bus->capacity }} zitplaatsen)
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <button type="submit"

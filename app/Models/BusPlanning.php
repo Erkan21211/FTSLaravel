@@ -36,6 +36,6 @@ class BusPlanning extends Model
 
     public function getAvailableSeatsAttribute()
     {
-        return $this->capacity - $this->seats_filled;
+        return $this->attributes['available_seats'] ?? 0;
     }
 }

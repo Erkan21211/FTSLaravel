@@ -16,8 +16,8 @@ class FestivalFactory extends Factory
         return [
             'name' => $this->faker->word . ' Festival',
             'location' => $this->faker->city,
-            'start_date' => $this->faker->dateTimeBetween('+1 week', '+2 weeks'),
-            'end_date' => $this->faker->dateTimeBetween('+3 weeks', '+4 weeks'),
+            'start_date' => $this->faker->dateTimeBetween('now', '+1 year'),
+            'end_date' => $this->faker->dateTimeBetween('now', '+1 year'),
         ];
     }
 }

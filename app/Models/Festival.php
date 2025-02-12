@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Festival extends Model
 {
@@ -16,8 +19,8 @@ class Festival extends Model
         'end_date',
     ];
 
-    public function busPlannings()
+    public function busPlanning(): HasOne
     {
-        return $this->hasMany(BusPlanning::class);
+        return $this->hasOne(BusPlanning::class, 'festival_id');
     }
 }
