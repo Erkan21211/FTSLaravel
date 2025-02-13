@@ -37,7 +37,7 @@
                         Mijn Boekingen
                     </a>
                     <a href="{{ route('reizen.index') }}"
-                       class="bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 rounded shadow-md transition">
+                       class="bg-blue-500 hover:bg-blue-600 text-black font-bold py-2 px-4 rounded shadow-md transition">
                         Nu boeken
                     </a>
                 </div>
@@ -53,23 +53,23 @@
                                class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-800"
                                value="{{ request('query') }}">
                         @if (isset($searchResults))
-                            <div class="bg-gray-500 shadow-md rounded-lg p-6 mt-6">
+                            <div class="bg-gray-950 shadow-md rounded-lg p-6 mt-6">
                                 @if ($searchResults->isNotEmpty())
                                     <div class="overflow-x-auto">
                                         <table class="w-full text-gray-300">
                                             <thead>
                                             <tr>
-                                                <th class="border-b text-black border-gray-600 p-2 text-left">Festivalnaam</th>
-                                                <th class="border-b text-black border-gray-600 p-2 text-left">Locatie</th>
-                                                <th class="border-b text-black border-gray-600 p-2 text-left">Startdatum</th>
-                                                <th class="border-b text-black border-gray-600 p-2 text-left">Einddatum</th>
+                                                <th class="border-b text-white border-gray-600 p-2 text-left">Festivalnaam</th>
+                                                <th class="border-b text-white border-gray-600 p-2 text-left">Locatie</th>
+                                                <th class="border-b text-white border-gray-600 p-2 text-left">Startdatum</th>
+                                                <th class="border-b text-white border-gray-600 p-2 text-left">Einddatum</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             @foreach ($searchResults as $result)
                                                 <tr>
-                                                    <td class="p-2 text-black" >{{ $result->name }}</td>
-                                                    <td class="p-2 text-black">{{ $result->location }}</td>
+                                                    <td class="p-2 text-white" >{{ $result->name }}</td>
+                                                    <td class="p-2 text-white">{{ $result->location }}</td>
                                                     <td class="border-b border-gray-600 p-4">{{ \Carbon\Carbon::parse($result->start_date)->format('d-m-Y') }}</td>
                                                     <td class="border-b border-gray-600 p-4">{{ \Carbon\Carbon::parse($result->end_date)->format('d-m-Y') }}</td>
                                                 </tr>

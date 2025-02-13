@@ -18,7 +18,7 @@
             </div>
         @endif
 
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="bg-gray-800 shadow-lg rounded-lg overflow-hidden">
             <div class="p-6">
                 @if($bookings->isEmpty())
                     <p class="text-gray-600">{{ __('Je hebt nog geen boekingen.') }}</p>
@@ -26,23 +26,23 @@
                     <div class="overflow-x-auto">
                         <table class="w-full table-auto border-collapse">
                             <thead>
-                            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                <th class="py-3 px-6 text-left">Festivalnaam</th>
-                                <th class="py-3 px-6 text-left">Datum en Tijd</th>
-                                <th class="py-3 px-6 text-right">Kosten</th>
-                                <th class="py-3 px-6 text-center">Status</th>
-                                <th class="py-3 px-6 text-center">Actie</th>
+                            <tr class="bg-gray-400 text-white uppercase text-sm leading-normal">
+                                <th class="py-3 px-6 text-left text-white">Festivalnaam</th>
+                                <th class="py-3 px-6 text-left text-white">Datum en Tijd</th>
+                                <th class="py-3 px-6 text-right text-white">Kosten</th>
+                                <th class="py-3 px-6 text-center text-white">Status</th>
+                                <th class="py-3 px-6 text-center text-white">Actie</th>
                             </tr>
                             </thead>
                             <tbody class="text-gray-600 text-sm font-light">
                             @foreach ($bookings as $booking)
-                                <tr class="border-b border-gray-200 hover:bg-gray-100">
-                                    <td class="py-3 px-6 text-left whitespace-nowrap">{{ $booking->festival->name }}</td>
-                                    <td class="py-3 px-6 text-left">
+                                <tr class="border-b border-gray-600">
+                                    <td class="py-3 px-6 text-left whitespace-nowrap text-white">{{ $booking->festival->name }}</td>
+                                    <td class="py-3 px-6 text-left text-white">
                                         {{ \Carbon\Carbon::parse($booking->booking_date)->format('d-m-Y H:i') }}
                                     </td>
-                                    <td class="py-3 px-6 text-right">€{{ number_format($booking->cost, 2) }}</td>
-                                    <td class="py-3 px-6 text-center">
+                                    <td class="py-3 px-6 text-right text-white">€{{ number_format($booking->cost, 2) }}</td>
+                                    <td class="py-3 px-6 text-center text-white">
                                             <span class="py-1 px-3 rounded-full text-xs font-medium
                                                 {{ $booking->status === 'actief' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700' }}">
                                                 {{ ucfirst($booking->status) }}
