@@ -38,7 +38,9 @@
                             @foreach ($bookings as $booking)
                                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                                     <td class="py-3 px-6 text-left whitespace-nowrap">{{ $booking->festival->name }}</td>
-                                    <td class="py-3 px-6 text-left">{{ $booking->booking_date }}</td>
+                                    <td class="py-3 px-6 text-left">
+                                        {{ \Carbon\Carbon::parse($booking->booking_date)->format('d-m-Y H:i') }}
+                                    </td>
                                     <td class="py-3 px-6 text-right">€{{ number_format($booking->cost, 2) }}</td>
                                     <td class="py-3 px-6 text-center">
                                             <span class="py-1 px-3 rounded-full text-xs font-medium

@@ -21,7 +21,7 @@
                 </a>
             </div>
 
-            <!-- Responsive Tabel -->
+
             <div class="overflow-x-auto">
                 <table class="w-full text-white border-collapse">
                     <thead>
@@ -38,17 +38,32 @@
                             <td class="border-b border-gray-600 p-4 truncate">{{ $customer->first_name . ' ' . $customer->last_name }}</td>
                             <td class="border-b border-gray-600 p-4 truncate">{{ $customer->email }}</td>
                             <td class="border-b border-gray-600 p-4 truncate">{{ $customer->phone_number }}</td>
-                            <td class="border-b border-gray-600 p-4 whitespace-nowrap">
-                                <a href="{{ route('admin.customers.edit', $customer->id) }}" class="text-blue-500 hover:underline">Bewerken</a>
-                                <a href="{{ route('admin.customers.history', $customer->id) }}" class="text-green-500 hover:underline">Reisgeschiedenis</a>
+                            <td class="border-b border-gray-600 p-2 whitespace-nowrap space-x-1">
+                                <!-- Bewerken knop -->
+                                <a href="{{ route('admin.customers.edit', $customer->id) }}"
+                                   class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded text-sm shadow-md transition">
+                                    Bewerken
+                                </a>
+
+                                <!-- Reisgeschiedenis knop -->
+                                <a href="{{ route('admin.customers.history', $customer->id) }}"
+                                   class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded text-sm shadow-md transition">
+                                    Reisgeschiedenis
+                                </a>
+
+                                <!-- Verwijderen knop -->
                                 <form action="{{ route('admin.customers.destroy', $customer->id) }}" method="POST" style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-red-500 hover:underline"
-                                            onclick="return confirm('Weet je zeker dat je deze klant wilt verwijderen?')">Verwijderen
+                                    <button type="submit"
+                                            class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded text-sm shadow-md transition"
+                                            onclick="return confirm('Weet je zeker dat je deze klant wilt verwijderen?')">
+                                        Verwijderen
                                     </button>
                                 </form>
                             </td>
+
+
                         </tr>
                     @endforeach
                     </tbody>

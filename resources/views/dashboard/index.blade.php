@@ -10,22 +10,22 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
-        <div class="bg-white shadow-md rounded-lg p-6">
+        <div class="bg-gray-800 shadow-md rounded-lg p-6">
             @if(auth()->user()->is_admin)
                 <!-- Admin Dashboard Content -->
-                <h1 class="text-2xl font-bold mb-4">Welkom, {{ auth()->user()->first_name }}</h1>
-                <p class="text-gray-600">Hier kunt u klanten, reizen en het puntensysteem beheren.</p>
+                <h1 class="text-2xl text-white font-bold mb-4">Welkom, {{ auth()->user()->first_name }}</h1>
+                <p class="text-white">Hier kunt u klanten, reizen en het puntensysteem beheren.</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
                     <a href="{{ route('admin.customers.index') }}"
                        class="bg-blue-500 hover:bg-blue-600 text-black font-bold py-4 px-6 rounded text-center shadow-md">
                         Klanten Beheren
                     </a>
                     <a href="{{ route('admin.reizen.index') }}"
-                       class="bg-green-500 hover:bg-green-600 text-black font-bold py-4 px-6 rounded text-center shadow-md">
+                       class="bg-blue-500 hover:bg-blue-600 text-black font-bold py-4 px-6 rounded text-center shadow-md">
                         Reizen Beheren
                     </a>
                     <a href="{{ route('admin.points.index') }}"
-                       class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-4 px-6 rounded text-center shadow-md">
+                       class="bg-blue-500 hover:bg-blue-600 text-black font-bold py-4 px-6 rounded text-center shadow-md">
                         Punten Beheren
                     </a>
                 </div>
@@ -70,8 +70,8 @@
                                                 <tr>
                                                     <td class="p-2 text-black" >{{ $result->name }}</td>
                                                     <td class="p-2 text-black">{{ $result->location }}</td>
-                                                    <td class="p-2 text-black">{{ $result->start_date }}</td>
-                                                    <td class="p-2 text-black">{{ $result->end_date }}</td>
+                                                    <td class="border-b border-gray-600 p-4">{{ \Carbon\Carbon::parse($result->start_date)->format('d-m-Y') }}</td>
+                                                    <td class="border-b border-gray-600 p-4">{{ \Carbon\Carbon::parse($result->end_date)->format('d-m-Y') }}</td>
                                                 </tr>
                                             @endforeach
                                             </tbody>

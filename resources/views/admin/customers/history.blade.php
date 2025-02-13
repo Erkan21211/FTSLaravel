@@ -6,15 +6,15 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
-        <div class="bg-white shadow-md rounded-lg p-6">
-            <h1 class="text-2xl font-bold mb-4">Reisgeschiedenis</h1>
+        <div class="bg-gray-800 shadow-md rounded-lg p-6">
+            <h1 class="text-2xl text-white font-bold mb-4">Reisgeschiedenis</h1>
 
             @if ($bookings->isEmpty())
                 <p class="text-gray-600">Geen reisgeschiedenis beschikbaar voor deze klant.</p>
             @else
                 <table class="w-full text-gray-800 border-collapse">
                     <thead>
-                    <tr class="bg-gray-200">
+                    <tr class="bg-gray-700 text-gray-300">
                         <th class="border-b border-gray-300 p-4 text-left">Datum</th>
                         <th class="border-b border-gray-300 p-4 text-left">Festivalnaam</th>
                         <th class="border-b border-gray-300 p-4 text-left">Locatie</th>
@@ -23,11 +23,11 @@
                     </thead>
                     <tbody>
                     @foreach ($bookings as $booking)
-                        <tr>
-                            <td class="border-b border-gray-300 p-4">{{ $booking->booking_date->format('d-m-Y') }}</td>
-                            <td class="border-b border-gray-300 p-4">{{ $booking->festival->name }}</td>
-                            <td class="border-b border-gray-300 p-4">{{ $booking->festival->location }}</td>
-                            <td class="border-b border-gray-300 p-4">€{{ number_format($booking->cost, 2) }}</td>
+                        <tr class="hover:bg-gray-700 transition">
+                            <td class="border-b border-gray-600 p-4 text-white">{{ $booking->booking_date->format('d-m-Y') }}</td>
+                            <td class="border-b border-gray-600 p-4 text-white">{{ $booking->festival->name }}</td>
+                            <td class="border-b border-gray-600 p-4 text-white">{{ $booking->festival->location }}</td>
+                            <td class="border-b border-gray-600 p-4 text-white">€{{ number_format($booking->cost, 2) }}</td>
                         </tr>
                     @endforeach
                     </tbody>

@@ -13,37 +13,42 @@
 
                 <div>
                     <label for="name" class="block text-sm font-medium text-white">Festivalnaam</label>
-                    <input type="text" name="name" id="name" value="{{ $festival->name }}" class="mt-1 block w-full p-2 rounded bg-gray-700 text-black" required>
+                    <input type="text" name="name" id="name" value="{{ $festival->name }}" class="mt-1 block w-full p-2 rounded bg-gray-700 text-white" required>
                 </div>
 
                 <div>
                     <label for="location" class="block text-sm font-medium text-white">Locatie</label>
-                    <input type="text" name="location" id="location" value="{{ $festival->location }}" class="mt-1 block w-full p-2 rounded bg-gray-700 text-black" required>
+                    <input type="text" name="location" id="location" value="{{ $festival->location }}" class="mt-1 block w-full p-2 rounded bg-gray-700 text-white" required>
                 </div>
 
                 <div>
                     <label for="start_date" class="block text-sm font-medium text-white">Startdatum</label>
-                    <input type="date" name="start_date" id="start_date" value="{{ $festival->start_date }}" class="mt-1 block w-full p-2 rounded bg-gray-700 text-black" required>
+                    <input type="date" name="start_date" id="start_date"
+                           value="{{ \Carbon\Carbon::parse($festival->start_date)->format('Y-m-d') }}"
+                           class="mt-1 block w-full p-2 rounded bg-gray-700 text-white" required>
                 </div>
 
                 <div>
                     <label for="end_date" class="block text-sm font-medium text-white">Einddatum</label>
-                    <input type="date" name="end_date" id="end_date" value="{{ $festival->end_date }}" class="mt-1 block w-full p-2 rounded bg-gray-700 text-black" required>
+                    <input type="date" name="end_date" id="end_date"
+                           value="{{ \Carbon\Carbon::parse($festival->end_date)->format('Y-m-d') }}"
+                           class="mt-1 block w-full p-2 rounded bg-gray-700 text-white" required>
                 </div>
+
 
                 <div>
                     <label for="cost_per_seat" class="block text-sm font-medium text-white">Kosten per stoel</label>
-                    <input type="number" step="0.01" name="cost_per_seat" id="cost_per_seat" value="{{ $festival->busPlanning->cost_per_seat ?? '' }}" class="mt-1 block w-full p-2 rounded bg-gray-700 text-black" required>
+                    <input type="number" step="0.01" name="cost_per_seat" id="cost_per_seat" value="{{ $festival->busPlanning->cost_per_seat ?? '' }}" class="mt-1 block w-full p-2 rounded bg-gray-700 text-white" required>
                 </div>
 
                 <div>
                     <label for="available_seats" class="block text-sm font-medium text-white">Beschikbare stoelen</label>
-                    <input type="number" name="available_seats" id="available_seats" value="{{ $festival->busPlanning->available_seats ?? '' }}" class="mt-1 block w-full p-2 rounded bg-gray-700 text-black" required>
+                    <input type="number" name="available_seats" id="available_seats" value="{{ $festival->busPlanning->available_seats ?? '' }}" class="mt-1 block w-full p-2 rounded bg-gray-700 text-white" required>
                 </div>
 
                 <div>
                     <label for="bus_id" class="block text-sm font-medium text-white">Bus</label>
-                    <select name="bus_id" id="bus_id" class="mt-1 block w-full p-2 rounded bg-gray-700 text-black" required>
+                    <select name="bus_id" id="bus_id" class="mt-1 block w-full p-2 rounded bg-gray-700 text-white" required>
                         @foreach(App\Models\Bus::all() as $bus)
                             <option value="{{ $bus->id }}" {{ ($festival->busPlanning->bus_id ?? '') == $bus->id ? 'selected' : '' }}>
                                 {{ $bus->name }} ({{ $bus->capacity }} zitplaatsen)

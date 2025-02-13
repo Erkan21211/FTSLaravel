@@ -48,8 +48,9 @@
                         <tr>
                             <td class="border-b border-gray-600 p-4">{{ $busPlanning->festival->name }}</td>
                             <td class="border-b border-gray-600 p-4">{{ $busPlanning->festival->location }}</td>
-                            <td class="border-b border-gray-600 p-4">{{ $busPlanning->festival->start_date }}</td>
-                            <td class="border-b border-gray-600 p-4">{{ $busPlanning->festival->end_date }}</td>
+                            <td class="border-b border-gray-600 p-4">{{ \Carbon\Carbon::parse($busPlanning->festival->start_date)->format('d-m-Y') }}</td>
+                            <td class="border-b border-gray-600 p-4">{{ \Carbon\Carbon::parse($busPlanning->festival->end_date)->format('d-m-Y') }}</td>
+
                             <td class="border-b border-gray-600 p-4">
                                 €{{ number_format($busPlanning->cost_per_seat, 2) }}</td>
                             <td class="border-b border-gray-600 p-4">
