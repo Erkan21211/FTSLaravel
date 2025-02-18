@@ -38,20 +38,19 @@ Een Laravel-applicatie voor het beheren van festivalreisboekingen voor een busma
 
 3. Open het `.env`-bestand en pas de database-instellingen aan:
 
-   ```env
+```env
    DB_CONNECTION=mysql
    DB_HOST=127.0.0.1
    DB_PORT=3306
    DB_DATABASE=festival_travel_system
    DB_USERNAME=root
    DB_PASSWORD= # Vul hier je wachtwoord in
-   ```
 ```
 
 ### 5. Voer de database migraties en seeders uit
 
 ```sh
- php artisan migrate --seed
+ php artisan migrate:refresh --seed
 ```
 
 ### 6. Build de frontend
@@ -82,7 +81,7 @@ Open je browser en ga naar:
 
 
 
-
+//
 
 
 

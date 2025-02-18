@@ -6,11 +6,11 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
-        <div class="bg-white shadow-md rounded-lg p-6">
+        <div class="bg-gray-800 shadow-md rounded-lg p-6">
             <div class="overflow-x-auto">
-                <table class="w-full text-gray-600 border-collapse">
+                <table class="w-full bg-gray-800 text-gray-600 border-collapse">
                     <thead>
-                    <tr class="bg-gray-200 text-gray-800">
+                    <tr class="bg-gray-600 text-white">
                         <th class="border-b border-gray-300 p-4 text-left">Festival</th>
                         <th class="border-b border-gray-300 p-4 text-left">Locatie</th>
                         <th class="border-b border-gray-300 p-4 text-left">Vertrektijd</th>
@@ -20,12 +20,12 @@
                     </thead>
                     <tbody>
                     @foreach ($busPlannings as $busPlanning)
-                        <tr class="hover:bg-gray-100">
-                            <td class="p-4">{{ $busPlanning->festival->name }}</td>
-                            <td class="p-4">{{ $busPlanning->festival->location }}</td>
-                            <td class="p-4">{{ $busPlanning->departure_time }}</td>
-                            <td class="p-4 text-right">€{{ number_format($busPlanning->cost_per_seat, 2) }}</td>
-                            <td class="p-4 text-right">{{ $busPlanning->available_seats - $busPlanning->seats_filled }}</td>
+                        <tr class="">
+                            <td class="p-4 text-white">{{ $busPlanning->festival->name }}</td>
+                            <td class="p-4 text-white">{{ $busPlanning->festival->location }}</td>
+                            <td class="p-4 text-white">{{ $busPlanning->departure_time }}</td>
+                            <td class="p-4 text-white text-right">€{{ number_format($busPlanning->cost_per_seat, 2) }}</td>
+                            <td class="p-4 text-white text-right">{{ $busPlanning->available_seats - $busPlanning->seats_filled }}</td>
                         </tr>
                     @endforeach
                     </tbody>
