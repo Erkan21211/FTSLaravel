@@ -4,14 +4,14 @@ Een Laravel-applicatie voor het beheren van festivalreisboekingen voor een busma
 
 ## Vereisten
 
-- **PHP** 8.x
-- **Composer**
-- **Node.js** 16.x of hoger
-- **MySQL**
+- **PHP 8.3.13+**
+- **Composer version 2.4.4**
+- **Node.js v22.11.0+**
+- **MYSQL Version 9.0.1+**
 
 ---
 
-## Snelle Installatiegids
+## SInstallatie
 
 ### 1. Clone de repository
 
@@ -46,11 +46,6 @@ Een Laravel-applicatie voor het beheren van festivalreisboekingen voor een busma
    DB_USERNAME=root
    DB_PASSWORD= # Vul hier je wachtwoord in
    ```
-
-### 4. Genereer een applicatiesleutel
-
-```sh
- php artisan key:generate
 ```
 
 ### 5. Voer de database migraties en seeders uit
@@ -61,12 +56,11 @@ Een Laravel-applicatie voor het beheren van festivalreisboekingen voor een busma
 
 ### 6. Build de frontend
 
-Voor ontwikkeling:
 ```sh
  npm run dev
 ```
 
-Voor productie:
+
 ```sh
  npm run build
 ```
@@ -82,6 +76,7 @@ Voor productie:
 Open je browser en ga naar:
 ```sh
  http://localhost:8000
+```
 
 
 
