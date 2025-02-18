@@ -29,11 +29,10 @@ Een Laravel-applicatie voor het beheren van festivalreisboekingen voor een busma
 
 ### 3. Database configureren
 
-1. Maak een database aan met de naam `festival_travel_system`.
-2. Kopieer het `.env.example` bestand naar `.env`:
+1. Pas de naam aan van bestand `.env.example` bestand naar `.env`:
 
    ```sh
-   cp .env.example .env
+   cp .env.example => .env
    ```
 
 3. Open het `.env`-bestand en pas de database-instellingen aan:
@@ -50,18 +49,20 @@ Een Laravel-applicatie voor het beheren van festivalreisboekingen voor een busma
 ### 5. Voer de database migraties en seeders uit
 
 ```sh
+ php artisan migrate --seed
  php artisan migrate:refresh --seed
 ```
 
 ### 6. Build de frontend
 
 ```sh
- npm run dev
+ npm run build
 ```
 
+## daarna
 
 ```sh
- npm run build
+ npm run dev
 ```
 
 ### 7. Start de ontwikkelserver
@@ -77,11 +78,7 @@ Open je browser en ga naar:
  http://localhost:8000
 ```
 
-
-
-
-
-//
+---
 
 
 

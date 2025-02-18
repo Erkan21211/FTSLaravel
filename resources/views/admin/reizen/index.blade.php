@@ -23,7 +23,7 @@
 
                 <!-- Nieuwe Bus Toevoegen -->
                 <a href="{{ route('admin.buses.create') }}"
-                   class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded shadow-md transition">
+                   class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-md transition">
                     Nieuwe Bus Toevoegen
                 </a>
             </div>
