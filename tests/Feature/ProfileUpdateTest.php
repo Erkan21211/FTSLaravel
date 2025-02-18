@@ -29,65 +29,77 @@ class ProfileUpdateTest extends TestCase
     /** @test */
     public function gebruiker_kan_profielgegevens_bijwerken()
     {
-        // Arrange: Maak een gebruiker aan en log in
-        $user = Customer::factory()->create();
+        // Schakel alle middleware uit (inclusief CSRF)
+        $this->withoutMiddleware();
+
+        // Maak een gebruiker met vaste beginwaarden
+        $user = Customer::factory()->create([
+            'first_name'   => 'Pepijn',
+            'last_name'    => 'de Ruiter',
+            'email'        => 'muller.thijmen@example.com',
+            'phone_number' => '0622414609',
+        ]);
 
         $newData = [
-            'first_name' => 'NieuweVoornaam',
-            'last_name' => 'NieuweAchternaam',
-            'email' => 'nieuwe_email@example.com',
+            'first_name'   => 'NieuweVoornaam',
+            'last_name'    => 'NieuweAchternaam',
+            'email'        => 'nieuwe.email@example.com',
             'phone_number' => '0612345678',
         ];
 
-        // Act: Verstuur een PATCH-verzoek
+        // Act: Voer de PATCH-request uit
         $response = $this->actingAs($user)->patch(route('profile.update'), $newData);
 
-        // Debug: Controleer de redirect en database
-//        dd($response->headers->get('Location'), $user->fresh()->toArray());
-
-        // Assert: Controleer de redirect en database
+        // Assert: Controleer dat er geredirect wordt naar de profielpagina
         $response->assertRedirect(route('profile.edit'));
+
+        // Assert: Controleer dat de database de nieuwe gegevens bevat
         $this->assertDatabaseHas('customers', [
-            'id' => $user->id,
-            'first_name' => 'NieuweVoornaam',
-            'last_name' => 'NieuweAchternaam',
-            'email' => 'nieuwe_email@example.com',
+            'id'           => $user->id,
+            'first_name'   => 'NieuweVoornaam',
+            'last_name'    => 'NieuweAchternaam',
+            'email'        => 'nieuwe.email@example.com',
             'phone_number' => '0612345678',
         ]);
     }
+
+
 
     /** @test */
     public function validatie_faalt_bij_ongeldige_gegevens()
     {
-        // Arrange: Maak een gebruiker aan en log in
+        // Schakel alle middleware uit (inclusief CSRF)
+        $this->withoutMiddleware();
+
+        // Arrange: Maak een gebruiker aan
         $user = Customer::factory()->create();
 
         // Ongeldige gegevens
         $invalidData = [
-            'first_name' => '', // Verplicht veld
-            'last_name' => '',  // Verplicht veld
-            'email' => 'geen_geldig_emailadres', // Ongeldig e-mailadres
-            'phone_number' => str_repeat('1', 21), // Maximaal 20 karakters
+            'first_name'   => '', // verplicht veld
+            'last_name'    => '', // verplicht veld
+            'email'        => 'geen_geldig_emailadres', // ongeldig e-mailadres
+            'phone_number' => str_repeat('1', 21), // te lang, maximaal 20 karakters
         ];
 
-        // Act: Verstuur een PATCH-verzoek met ongeldige gegevens
-        $response = $this->actingAs($user)->patch(route('profile.update'), $invalidData);
+        // Act: Verstuur de PATCH-request en geef een "from"-URL op (controleer of deze route bestaat of gebruik een URL-string)
+        $response = $this->actingAs($user)
+            ->from('/profile/edit')
+            ->patch(route('profile.update'), $invalidData);
 
-        // Assert: Controleer of de validatiefouten worden weergegeven
-        $response->assertSessionHasErrors([
-            'first_name',
-            'last_name',
-            'email',
-            'phone_number',
-        ]);
+        // Assert: De response moet redirecten naar de "from"-URL en validatiefouten bevatten
+        $response->assertStatus(302);
+        $response->assertRedirect('/profile/edit');
+        $response->assertSessionHasErrors(['first_name', 'last_name', 'email', 'phone_number']);
 
-        // Controleer dat de gegevens niet zijn bijgewerkt
+        // Assert: Controleer dat de gebruiker in de database niet is gewijzigd
         $this->assertDatabaseHas('customers', [
-            'id' => $user->id,
-            'first_name' => $user->first_name,
-            'last_name' => $user->last_name,
-            'email' => $user->email,
+            'id'           => $user->id,
+            'first_name'   => $user->first_name,
+            'last_name'    => $user->last_name,
+            'email'        => $user->email,
             'phone_number' => $user->phone_number,
         ]);
     }
+
 }

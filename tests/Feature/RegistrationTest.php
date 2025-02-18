@@ -16,22 +16,27 @@ class RegistrationTest extends TestCase
     public function test_registration_form_is_accessible()
     {
         $response = $this->get('/register');
-        $response->assertStatus(200); // Check if the page loads successfully
-        $response->assertSee('Register'); // Verify the presence of the form
+        $response->assertStatus(200);
+        $response->assertSee('Register');
     }
 
     public function test_user_can_register()
     {
-        $response = $this->post('/register', [
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-            'email' => 'john.doe@example.com',
-            'phone_number' => '1234567890',
-            'password' => 'Password123!',
+        // Start de sessie zodat we een CSRF-token krijgen
+        session()->start();
+        $data = [
+            '_token'                => session()->token(),
+            'first_name'            => 'John',
+            'last_name'             => 'Doe',
+            'email'                 => 'john.doe@example.com',
+            'phone_number'          => '1234567890',
+            'password'              => 'Password123!',
             'password_confirmation' => 'Password123!',
-        ]);
+        ];
 
+        $response = $this->post('/register', $data);
         $response->assertRedirect('/login');
+
         $this->assertDatabaseHas('customers', [
             'email' => 'john.doe@example.com',
         ]);
@@ -39,38 +44,44 @@ class RegistrationTest extends TestCase
 
     public function test_registration_validation_fails_with_invalid_data()
     {
-        $response = $this->post('/register', [
-            'first_name' => '',
-            'last_name' => 'Doe',
-            'email' => 'invalid-email',
-            'phone_number' => '123456789012345678901', // Too long
-            'password' => 'short',
+        session()->start();
+        $data = [
+            '_token'                => session()->token(),
+            'first_name'            => '', // leeg: verplicht veld
+            'last_name'             => 'Doe',
+            'email'                 => 'invalid-email', // ongeldig e-mailadres
+            'phone_number'          => '123456789012345678901', // te lang (meer dan 20 karakters)
+            'password'              => 'short', // te kort en voldoet niet aan de eisen
             'password_confirmation' => 'short',
-        ]);
+        ];
 
+        $response = $this->post('/register', $data);
         $response->assertSessionHasErrors(['first_name', 'email', 'password']);
     }
 
     public function test_registration_fails_with_duplicate_email()
     {
-        // Create an existing customer
+        // Maak een bestaande klant aan
         Customer::create([
-            'first_name' => 'Jane',
-            'last_name' => 'Doe',
-            'email' => 'jane.doe@example.com',
+            'first_name'   => 'Jane',
+            'last_name'    => 'Doe',
+            'email'        => 'jane.doe@example.com',
             'phone_number' => '1234567890',
-            'password' => bcrypt('Password123!'),
+            'password'     => bcrypt('Password123!'),
         ]);
 
-        $response = $this->post('/register', [
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-            'email' => 'jane.doe@example.com', // Duplicate email
-            'phone_number' => '0987654321',
-            'password' => 'Password123!',
+        session()->start();
+        $data = [
+            '_token'                => session()->token(),
+            'first_name'            => 'John',
+            'last_name'             => 'Doe',
+            'email'                 => 'jane.doe@example.com', // duplicate email
+            'phone_number'          => '0987654321',
+            'password'              => 'Password123!',
             'password_confirmation' => 'Password123!',
-        ]);
+        ];
 
+        $response = $this->post('/register', $data);
         $response->assertSessionHasErrors(['email']);
     }
 }

@@ -14,6 +14,7 @@ class BusSeeder extends Seeder
     public function run(): void
     {
         Bus::factory()->count(5)->create([
+            'name' => 'Bus',
             'capacity' => 50, // Standaard capaciteit
         ]);
     }

@@ -27,10 +27,6 @@ class ProfileController extends Controller
 
         $customer = Auth::user(); // Haal de ingelogde gebruiker op
         return view('profile.edit', compact('customer'));
-
-//        return view('profile.edit', [
-//            'user' => $request->user(),
-//        ]);
     }
 
     /**

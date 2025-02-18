@@ -181,24 +181,6 @@ CREATE TABLE IF NOT EXISTS `festival_travel_system`.`cache_locks` (
 
 
 -- -----------------------------------------------------
--- Table `festival_travel_system`.`discounts`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `festival_travel_system`.`discounts` ;
-
-CREATE TABLE IF NOT EXISTS `festival_travel_system`.`discounts` (
-                                                                    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-                                                                    `name` VARCHAR(255) NOT NULL,
-    `required_points` INT NOT NULL,
-    `value` DECIMAL(8,2) NOT NULL,
-    `created_at` TIMESTAMP NULL DEFAULT NULL,
-    `updated_at` TIMESTAMP NULL DEFAULT NULL,
-    PRIMARY KEY (`id`))
-    ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_unicode_ci;
-
-
--- -----------------------------------------------------
 -- Table `festival_travel_system`.`failed_jobs`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `festival_travel_system`.`failed_jobs` ;
