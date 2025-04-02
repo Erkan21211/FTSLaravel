@@ -11,7 +11,7 @@ Een Laravel-applicatie voor het beheren van festival reis boekingen voor een bus
 
 ---
 
-## SInstallatie
+## Installatie
 
 ### 1. Clone de repository
 
