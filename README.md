@@ -1,6 +1,6 @@
 
 # Festival Travel System
-Een Laravel-applicatie voor het beheren van festivalreisboekingen voor een busmaatschappij.
+Een Laravel-applicatie voor het beheren van festival reis boekingen voor een busmaatschappij.
 
 ## Vereisten
 
